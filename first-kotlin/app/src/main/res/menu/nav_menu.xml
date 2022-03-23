@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="STORAGE">
+        <menu>
+            <item android:title="My Files" android:icon="@drawable/files"/>
+            <item android:title="Music Queue" android:icon="@drawable/music"/>
+            <item android:title="Print" android:icon="@drawable/print"/>
+            <item android:title="Connect" android:icon="@drawable/globe"/>
+        </menu>
+    </item>
+</menu>
