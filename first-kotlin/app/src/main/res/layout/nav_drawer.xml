@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.navigation.NavigationView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/nav_drawer"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent">
+    <group>
+        <menu>
+            <item
+                android:id="@+id/main_item"
+                android:title="sub header title">
+                <menu>
+                    <item
+                        android:id="@+id/inbox_item"
+                        android:checkable="true"
+                        android:title="title 1" />
+                    <item
+                        android:id="@+id/outbox_item"
+                        android:checkable="true"
+                        android:title="title 2" />
+                    <item
+                        android:id="@+id/favourites_item"
+                        android:checkable="true"
+                        android:title="title 3" />
+                </menu>
+            </item>
+        </menu>
+    </group>
+</com.google.android.material.navigation.NavigationView>

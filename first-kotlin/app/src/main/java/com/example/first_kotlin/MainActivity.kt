@@ -6,13 +6,15 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    var counter = 0;
+    var counter = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        counter_text.setText(counter.toString());
-        increment_button.setOnClickListener { x -> counter_text.setText(counter++.toString()) }
-        decrement_button.setOnClickListener { x -> counter_text.setText(counter--.toString()) }
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        increment_button.setOnClickListener { x -> run{
+            counter_text.text = counter++.toString()
+        } }
+        counter_text.text = counter.toString()
+        decrement_button.setOnClickListener { x -> counter_text.text = counter--.toString() }
     }
 }
