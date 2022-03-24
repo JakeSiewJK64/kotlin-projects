@@ -1,13 +1,12 @@
 package com.example.first_kotlin
 
-import android.content.Intent
 import android.os.Bundle
-import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import com.example.first_kotlin.services.RenderBottomNavService
+import com.example.first_kotlin.services.RenderDrawerFragmentService
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.bottom_navbar.*
@@ -26,6 +25,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main);
 
         bottomNavigation = bottom_navbar;
+        bottomNavigation.setOnItemSelectedListener  { i ->
+            RenderBottomNavService.renderBottomNav(i.toString(), this)
+            true;
+        }
 
         /**
          * START OF NAVIGATION SECTION
@@ -40,7 +43,7 @@ class MainActivity : AppCompatActivity() {
         navView = findViewById(R.id.nav_view);
 
         navView.setNavigationItemSelectedListener { menuItem ->
-            renderFragment(menuItem);
+            RenderDrawerFragmentService.renderDrawerFragmentService(menuItem, this);
             true;
         }
     }
@@ -57,42 +60,7 @@ class MainActivity : AppCompatActivity() {
             super.onBackPressed();
         }
     }
-
     /**
      * END OF NAVIGATION SECTION
      */
-
-    private fun renderFragment(menuItem: MenuItem) {
-        when (menuItem.itemId) {
-            R.id.files -> {
-                Toast.makeText(this, "Files", Toast.LENGTH_SHORT).show();
-                true
-            }
-            R.id.music -> {
-                Toast.makeText(this, "Music", Toast.LENGTH_SHORT).show();
-                true
-            }
-            R.id.connect -> {
-                Toast.makeText(this, "Connect", Toast.LENGTH_SHORT).show()
-                true
-            }
-            R.id.print -> {
-                Toast.makeText(this, "Print", Toast.LENGTH_SHORT).show()
-                true
-            }
-            R.id.counter -> {
-                Toast.makeText(this, "Print", Toast.LENGTH_SHORT).show()
-                var intent = Intent(this, CounterActivity::class.java);
-                startActivity(intent);
-                true;
-            }
-            R.id.fragment2 -> {
-                Toast.makeText(this, "Print", Toast.LENGTH_SHORT).show()
-                true;
-            }
-            else -> {
-                false;
-            }
-        }
-    }
 }
