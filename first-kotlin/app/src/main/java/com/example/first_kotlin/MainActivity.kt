@@ -19,13 +19,12 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var bottomNavigation: BottomNavigationView;
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         bottomNavigation = bottom_navbar;
-        bottomNavigation.setOnItemSelectedListener  { i ->
+        bottomNavigation.setOnItemSelectedListener { i ->
             RenderBottomNavService.renderBottomNav(i.toString(), this)
             true;
         }

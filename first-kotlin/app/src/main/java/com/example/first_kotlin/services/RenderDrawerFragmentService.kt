@@ -1,11 +1,15 @@
 package com.example.first_kotlin.services
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
+import com.example.first_kotlin.CounterActivity
 import com.example.first_kotlin.R
 
-class RenderDrawerFragmentService {
+class RenderDrawerFragmentService : Activity() {
     companion object {
         fun renderDrawerFragmentService(menuItem: MenuItem, context: Context) {
             when (menuItem.itemId) {
@@ -27,6 +31,8 @@ class RenderDrawerFragmentService {
                 }
                 R.id.counter -> {
                     Toast.makeText(context, "Counter", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(context, CounterActivity::class.java);
+                    startActivity(context, intent, null);
                     true;
                 }
                 R.id.fragment2 -> {
