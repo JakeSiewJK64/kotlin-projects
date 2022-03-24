@@ -8,6 +8,8 @@
             <item android:id="@+id/music" android:title="Music Queue" android:icon="@drawable/music"/>
             <item android:id="@+id/print" android:title="Print" android:icon="@drawable/print"/>
             <item android:id="@+id/connect" android:title="Connect" android:icon="@drawable/globe"/>
+            <item android:id="@+id/counter" android:title="Counter" android:icon="@drawable/counter"/>
+            <item android:id="@+id/fragment2" android:title="Second Fragment" android:icon="@drawable/secondfragment"/>
         </menu>
     </item>
 </menu>

@@ -1,6 +1,8 @@
 package com.example.first_kotlin
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +20,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        /**
+         * START OF NAVIGATION SECTION
+         */
         drawerLayout = findViewById(R.id.drawer_layout);
         actionBarToggle = ActionBarDrawerToggle(this, drawerLayout, 0, 0);
         drawerLayout.addDrawerListener(actionBarToggle);
@@ -28,27 +33,8 @@ class MainActivity : AppCompatActivity() {
         navView = findViewById(R.id.nav_view);
 
         navView.setNavigationItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.files -> {
-                    Toast.makeText(this, "Files", Toast.LENGTH_SHORT).show();
-                    true
-                }
-                R.id.music -> {
-                    Toast.makeText(this, "Music", Toast.LENGTH_SHORT).show();
-                    true
-                }
-                R.id.connect -> {
-                    Toast.makeText(this, "Connect", Toast.LENGTH_SHORT).show()
-                    true
-                }
-                R.id.print -> {
-                    Toast.makeText(this, "Print", Toast.LENGTH_SHORT).show()
-                    true
-                }
-                else -> {
-                    false;
-                }
-            }
+            renderFragment(menuItem);
+            true;
         }
     }
 
@@ -62,6 +48,43 @@ class MainActivity : AppCompatActivity() {
             this.drawerLayout.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
+        }
+    }
+    /**
+     * END OF NAVIGATION SECTION
+     */
+
+    private fun renderFragment(menuItem: MenuItem) {
+        when (menuItem.itemId) {
+            R.id.files -> {
+                Toast.makeText(this, "Files", Toast.LENGTH_SHORT).show();
+                true
+            }
+            R.id.music -> {
+                Toast.makeText(this, "Music", Toast.LENGTH_SHORT).show();
+                true
+            }
+            R.id.connect -> {
+                Toast.makeText(this, "Connect", Toast.LENGTH_SHORT).show()
+                true
+            }
+            R.id.print -> {
+                Toast.makeText(this, "Print", Toast.LENGTH_SHORT).show()
+                true
+            }
+            R.id.counter -> {
+                Toast.makeText(this, "Print", Toast.LENGTH_SHORT).show()
+                var intent = Intent(this, CounterActivity::class.java);
+                startActivity(intent);
+                true;
+            }
+            R.id.fragment2 -> {
+                Toast.makeText(this, "Print", Toast.LENGTH_SHORT).show()
+                true;
+            }
+            else -> {
+                false;
+            }
         }
     }
 }
