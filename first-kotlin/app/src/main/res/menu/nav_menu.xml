@@ -10,6 +10,7 @@
             <item android:id="@+id/connect" android:title="Connect" android:icon="@drawable/globe"/>
             <item android:id="@+id/counter" android:title="Counter" android:icon="@drawable/counter"/>
             <item android:id="@+id/fragment2" android:title="Second Fragment" android:icon="@drawable/secondfragment"/>
+            <item android:id="@+id/garden_recycler_activity" android:title="Garden" android:icon="@drawable/flower"/>
         </menu>
     </item>
 </menu>

@@ -7,6 +7,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
 import com.example.first_kotlin.CounterActivity
+import com.example.first_kotlin.Flower
 import com.example.first_kotlin.R
 
 class RenderDrawerFragmentService : Activity() {
@@ -38,6 +39,11 @@ class RenderDrawerFragmentService : Activity() {
                 R.id.fragment2 -> {
                     Toast.makeText(context, "Fragment2", Toast.LENGTH_SHORT).show()
                     true;
+                }
+                R.id.garden_recycler_activity -> {
+                    Toast.makeText(context, "Garden", Toast.LENGTH_SHORT).show();
+                    val intent = Intent(context, Flower::class.java);
+                    startActivity(context, intent, null);
                 }
                 else -> {
                     false;
