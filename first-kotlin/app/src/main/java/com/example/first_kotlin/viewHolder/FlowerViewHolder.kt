@@ -1,4 +1,4 @@
-package com.example.first_kotlin.ViewHolder
+package com.example.first_kotlin.viewHolder
 
 import android.view.View
 import android.widget.TextView

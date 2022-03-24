@@ -4,9 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.first_kotlin.R
-import com.example.first_kotlin.ViewHolder.FlowerViewHolder;
+import com.example.first_kotlin.viewHolder.FlowerViewHolder;
 
-class FlowerAdapter(val flowerList: Array<String>) :
+class FlowerAdapter(private val flowerList: Array<String>) :
     RecyclerView.Adapter<FlowerViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FlowerViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.flower_container, parent, false);
