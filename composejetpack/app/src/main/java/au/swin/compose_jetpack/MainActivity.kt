@@ -1,6 +1,5 @@
 package au.swin.compose_jetpack
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.widget.Toast
@@ -14,8 +13,6 @@ import androidx.compose.material.icons.filled.MailOutline
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.ui.Modifier
 
-import au.swin.compose_jetpack.ui.theme.ComposejetpackTheme
-
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -26,18 +23,31 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+
+import au.swin.compose_jetpack.ui.theme.ComposejetpackTheme
+import au.swin.compose_jetpack.components.DefaultDrawer
 import au.swin.compose_jetpack.components.DefaultSnackbar
+import au.swin.compose_jetpack.components.SetAppBar
+
 import kotlinx.coroutines.launch
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            val drawerState = rememberDrawerState(DrawerValue.Closed)
             ComposejetpackTheme {
                 Scaffold(
                     topBar = { SetAppBar() },
                     content = {
                         NameCard(name = "JakeSiewJK64");
+                    },
+                    drawerContent = {
+                        DefaultDrawer(
+                            drawerState = drawerState,
+                            modifier = Modifier.fillMaxWidth()
+                        )
                     },
                     bottomBar = { SetBottomBar(this) }
                 )
@@ -66,15 +76,6 @@ fun SetBottomBar(context: Context) {
                 Toast.makeText(context, "Profile", Toast.LENGTH_SHORT).show();
             });
     }
-}
-
-@SuppressLint("InvalidColorHexValue")
-@Composable
-fun SetAppBar() {
-    TopAppBar(
-        title = { Text(text = "Therapist4u") },
-        backgroundColor = Color(0xffCe67e22)
-    );
 }
 
 @Composable
