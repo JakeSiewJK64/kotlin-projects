@@ -7,6 +7,10 @@ plugins {
 android {
     compileSdk 32
 
+    buildFeatures {
+        viewBinding true
+    }
+
     defaultConfig {
         applicationId "com.example.first_kotlin"
         minSdk 30
@@ -33,7 +37,13 @@ android {
 }
 
 dependencies {
+    def android_dev_nav_version = "2.4.1"
 
+    implementation "androidx.navigation:navigation-fragment-ktx:$android_dev_nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$android_dev_nav_version"
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.3.0'
     implementation 'com.google.android.material:material:1.4.0'
