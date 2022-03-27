@@ -7,6 +7,7 @@
         <entry key="..\:/GitHub/JakeSiewJK64/kotlin-projects/first-kotlin/app/src/main/res/layout/activity_counter.xml" value="0.17831813576494426" />
         <entry key="..\:/GitHub/JakeSiewJK64/kotlin-projects/first-kotlin/app/src/main/res/layout/activity_counter2.xml" value="0.22" />
         <entry key="..\:/GitHub/JakeSiewJK64/kotlin-projects/first-kotlin/app/src/main/res/layout/activity_flower.xml" value="0.16767983789260385" />
+        <entry key="..\:/GitHub/JakeSiewJK64/kotlin-projects/first-kotlin/app/src/main/res/layout/activity_genshin_recycler_view.xml" value="0.1" />
         <entry key="..\:/GitHub/JakeSiewJK64/kotlin-projects/first-kotlin/app/src/main/res/layout/activity_main.xml" value="0.21851851851851853" />
         <entry key="..\:/GitHub/JakeSiewJK64/kotlin-projects/first-kotlin/app/src/main/res/layout/app_bar.xml" value="0.33" />
         <entry key="..\:/GitHub/JakeSiewJK64/kotlin-projects/first-kotlin/app/src/main/res/layout/bottom_navbar.xml" value="0.33" />
@@ -15,8 +16,11 @@
         <entry key="..\:/GitHub/JakeSiewJK64/kotlin-projects/first-kotlin/app/src/main/res/layout/drawer_nav_drawer.xml" value="0.17831813576494426" />
         <entry key="..\:/GitHub/JakeSiewJK64/kotlin-projects/first-kotlin/app/src/main/res/layout/drawer_nav_view.xml" value="0.36666666666666664" />
         <entry key="..\:/GitHub/JakeSiewJK64/kotlin-projects/first-kotlin/app/src/main/res/layout/flower_container.xml" value="0.22" />
+        <entry key="..\:/GitHub/JakeSiewJK64/kotlin-projects/first-kotlin/app/src/main/res/layout/flower_viewholder.xml" value="0.16574074074074074" />
         <entry key="..\:/GitHub/JakeSiewJK64/kotlin-projects/first-kotlin/app/src/main/res/layout/fragment_first.xml" value="0.25" />
         <entry key="..\:/GitHub/JakeSiewJK64/kotlin-projects/first-kotlin/app/src/main/res/layout/fragment_second.xml" value="0.17831813576494426" />
+        <entry key="..\:/GitHub/JakeSiewJK64/kotlin-projects/first-kotlin/app/src/main/res/layout/genshin_list.xml" value="0.1" />
+        <entry key="..\:/GitHub/JakeSiewJK64/kotlin-projects/first-kotlin/app/src/main/res/layout/genshin_viewholder.xml" value="0.1" />
         <entry key="..\:/GitHub/JakeSiewJK64/kotlin-projects/first-kotlin/app/src/main/res/layout/nav_drawer.xml" value="0.25" />
         <entry key="..\:/GitHub/JakeSiewJK64/kotlin-projects/first-kotlin/app/src/main/res/layout/nav_drawer_group.xml" value="0.17831813576494426" />
         <entry key="..\:/GitHub/JakeSiewJK64/kotlin-projects/first-kotlin/app/src/main/res/layout/second_fragment.xml" value="0.14444444444444443" />

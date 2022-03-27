@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
 import com.example.first_kotlin.CounterActivity
 import com.example.first_kotlin.Flower
+import com.example.first_kotlin.GenshinRecyclerView
 import com.example.first_kotlin.R
 
 class RenderDrawerFragmentService : Activity() {
@@ -43,6 +44,11 @@ class RenderDrawerFragmentService : Activity() {
                 R.id.garden_recycler_activity -> {
                     Toast.makeText(context, "Garden", Toast.LENGTH_SHORT).show();
                     val intent = Intent(context, Flower::class.java);
+                    startActivity(context, intent, null);
+                }
+                R.id.genshin_recycler_activity -> {
+                    Toast.makeText(context, "Genshin", Toast.LENGTH_SHORT).show();
+                    val intent = Intent(context, GenshinRecyclerView::class.java);
                     startActivity(context, intent, null);
                 }
                 else -> {

@@ -9,7 +9,7 @@ import com.example.first_kotlin.viewHolder.FlowerViewHolder;
 class FlowerAdapter(private val flowerList: Array<String>) :
     RecyclerView.Adapter<FlowerViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FlowerViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.flower_container, parent, false);
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.flower_viewholder, parent, false);
         return FlowerViewHolder(view);
     }
 

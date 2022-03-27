@@ -22,4 +22,25 @@
         <item>Rhododendron</item>
         <item>Azalea</item>
     </string-array>
+
+    <string-array name="genshin_array">
+        <item>Ayaka</item>
+        <item>Eula</item>
+        <item>Iito</item>
+        <item>Raiden Shogun</item>
+        <item>Venti</item>
+        <item>Xiao</item>
+        <item>Zhong Li</item>
+        <item>Hu Tao</item>
+        <item>Jean</item>
+        <item>Aether</item>
+        <item>Lumine</item>
+        <item>Klee</item>
+        <item>Yae Miko</item>
+        <item>Barbara</item>
+        <item>Amber</item>
+        <item>Lisa</item>
+        <item>Bennett</item>
+        <item>Kazuha</item>
+    </string-array>
 </resources>
