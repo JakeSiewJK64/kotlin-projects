@@ -24,12 +24,18 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        /**
+         * BOTTOM NAVIGATION MENU
+         */
         bottomNavigation = bottom_navbar;
         bottomNavigation.setOnItemSelectedListener { i ->
-            RenderBottomNavService.renderBottomNav(i.toString(), this)
+            RenderBottomNavService.renderBottomNav(i.toString(), this, supportFragmentManager)
             true;
         }
 
+        /**
+         * NAVIGATION DRAWER MENU
+         */
         toolbar.setNavigationOnClickListener {
             if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
                 drawerLayout.close()
@@ -38,9 +44,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        /**
-         * START OF NAVIGATION SECTION
-         */
         drawerLayout = findViewById(R.id.drawer_layout);
         actionBarToggle = ActionBarDrawerToggle(this, drawerLayout, 0, 0);
         drawerLayout.addDrawerListener(actionBarToggle);
@@ -68,7 +71,4 @@ class MainActivity : AppCompatActivity() {
             super.onBackPressed();
         }
     }
-    /**
-     * END OF NAVIGATION SECTION
-     */
 }
