@@ -1,10 +1,8 @@
 package com.example.first_kotlin
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.first_kotlin.services.RenderBottomNavService
@@ -22,8 +20,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var bottomNavigation: BottomNavigationView;
 
-    private lateinit var topAppBar: Toolbar
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -35,7 +31,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         toolbar.setNavigationOnClickListener {
-            Toast.makeText(this, "dsadsadsa", Toast.LENGTH_SHORT).show()
+            if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                drawerLayout.close()
+            } else {
+                drawerLayout.openDrawer(navView)
+            }
         }
 
         /**
