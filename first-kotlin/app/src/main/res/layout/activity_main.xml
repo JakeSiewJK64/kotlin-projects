@@ -5,13 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-    <include
-        android:id="@+id/mTopAppBar"
-        layout="@layout/top_app_bar" />
+    <include layout="@layout/top_app_bar" />
     <include layout="@layout/drawer_nav_drawer" />
-    <FrameLayout
-        android:id="@+id/mFragmentFrame"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/mTopAppBar"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
