@@ -38,7 +38,8 @@ android {
 
 dependencies {
     def android_dev_nav_version = "2.4.1"
-
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0-native-mt'
+    implementation 'io.realm.kotlin:library-sync:0.10.0'
     implementation "androidx.navigation:navigation-fragment-ktx:$android_dev_nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$android_dev_nav_version"
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
