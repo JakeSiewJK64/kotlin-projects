@@ -1,42 +1,25 @@
 package au.swin.firestoreinitdb
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.ContentValues.TAG
 import android.os.Bundle
-import au.swin.firestoreinitdb.models.mUserModel
-import com.google.firebase.FirebaseApp
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.FirebaseFirestoreSettings
-import java.lang.Exception
+
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        FirebaseApp.initializeApp(this)
-        val mFirestore = FirebaseFirestore.getInstance()
-        mFirestore.firestoreSettings = FirebaseFirestoreSettings.Builder().build()
-        mFirestore
-            .collection("cafe-database")
-            .document("mUser")
+        val db = FirebaseFirestore.getInstance()
+        db.collection("mUsers")
             .get()
-            .addOnSuccessListener { document ->
-                try {
-                    if (document != null) {
-                        var users = document.toObject(mUserModel::class.java) ?: mUserModel(
-                            null,
-                            null,
-                            null
-                        )
-                        println(users)
-                    }
-                } catch (e: Exception) {
-                    e.printStackTrace()
+            .addOnCompleteListener {
+                val users = it.result
+                for(user in users) {
+                    Log.d(TAG, "$user.id => ${user.data}")
                 }
             }
-            .addOnFailureListener { err ->
-                println(err)
-            }
-
     }
 }
