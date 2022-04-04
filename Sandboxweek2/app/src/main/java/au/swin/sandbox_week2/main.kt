@@ -2,16 +2,19 @@ package au.swin.sandbox_week2
 
 import au.swin.decor.Decoration
 import au.swin.enums.Direction
+import au.swin.extensions.Extensions.Companion.pull
 import au.swin.fish.Plecostomus
 import au.swin.fish.Shark
 import au.swin.mDataClass.Aquarium
+import au.swin.mDataClass.AquariumPlant
 import au.swin.mDataClass.TowerTank
 import au.swin.sealed.SeaLion
 import au.swin.sealed.Seal
 import au.swin.sealed.Walrus
 
 fun main() {
-    pointDirection()
+    val plant: AquariumPlant? = null
+    plant.pull()
 }
 
 fun pointDirection() {
@@ -21,7 +24,7 @@ fun pointDirection() {
 }
 
 fun matchSeal(seal: Seal): String {
-    return when(seal) {
+    return when (seal) {
         is Walrus -> "walrus"
         is SeaLion -> "sea lion"
     }
