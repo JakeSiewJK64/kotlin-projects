@@ -12,9 +12,13 @@ import au.swin.sealed.SeaLion
 import au.swin.sealed.Seal
 import au.swin.sealed.Walrus
 
+var sum2: (Int, Int) -> Int = { a, b -> a + b }
+var sum3 = { a: Int, b: Int -> a + b }
 fun main() {
-    val plant: AquariumPlant? = null
-    plant.pull()
+    val myList: MutableList<Int> = mutableListOf(1,2,3)
+    myList.also{
+
+    }
 }
 
 fun pointDirection() {
