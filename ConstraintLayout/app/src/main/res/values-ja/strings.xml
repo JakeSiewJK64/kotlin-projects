@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ConstraintLayout</string>
+    <string name="addition_label">タス</string>
+    <string name="valueA">Aの値</string>
+    <string name="valueB">Bの値</string>
+</resources>
