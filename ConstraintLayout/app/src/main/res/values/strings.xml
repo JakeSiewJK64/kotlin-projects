@@ -3,4 +3,5 @@
     <string name="addition_label">ADDITION</string>
     <string name="valueA">Input value for A</string>
     <string name="valueB">Input value for B</string>
+    <string name="multiply_label">MULTIPLY</string>
 </resources>
