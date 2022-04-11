@@ -12,5 +12,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "ConstraintLayout"
+rootProject.name = "CalculatorApp"
 include ':app'
