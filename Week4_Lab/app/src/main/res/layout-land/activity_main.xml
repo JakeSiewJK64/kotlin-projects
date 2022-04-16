@@ -9,9 +9,8 @@
     <ImageView
         android:id="@+id/mImageView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:layout_margin="15dp"
-        android:minHeight="100dp"
         android:src="@drawable/oct"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
