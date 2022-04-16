@@ -25,7 +25,6 @@ class MainActivity : AppCompatActivity() {
         mTextView.text = mViewModel.number.toString()
         mTextView.setTextColor(Color.parseColor(mViewModel.colorCode))
 
-        mMediaPlayer.start()
         Log.i("MY_INFO", "color: ${mViewModel.colorCode}, number: ${mViewModel.number}")
         mScoreButton.setOnClickListener {
             mViewModel.playSound(mMediaPlayer)

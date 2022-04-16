@@ -20,7 +20,7 @@ class NumberViewModel : ViewModel() {
             in 10..15 -> "#00FF00"
             else -> "#000000"
         }
-        Log.i("M_COLOR_SELECTION", "Color returned ViewModel: ${colorCode}")
+        Log.i("M_COLOR_SELECTION", "Color returned ViewModel: $colorCode")
         return colorCode
     }
 }

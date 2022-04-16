@@ -1,4 +1,4 @@
-package au.edu.swin.sdmd.core1sample
+package au.swin.core1_siewjoekane_c1
 
 import android.content.pm.ActivityInfo
 import androidx.test.espresso.Espresso.onView
@@ -8,8 +8,6 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
-import au.swin.core1_siewjoekane_c1.MainActivity
-import au.swin.core1_siewjoekane_c1.R
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
