@@ -11,6 +11,8 @@ import androidx.activity.viewModels
 import au.swin.core1_siewjoekane_c1.viewModels.NumberViewModel
 
 class MainActivity : AppCompatActivity() {
+    private val mViewModel: NumberViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -19,7 +21,6 @@ class MainActivity : AppCompatActivity() {
         val mStealButton: Button = findViewById(R.id.mButton2)
         val mResetButton: Button = findViewById(R.id.mButton3)
         val mTextView: TextView = findViewById(R.id.mTextView)
-        val mViewModel: NumberViewModel by viewModels()
         val mMediaPlayer: MediaPlayer = MediaPlayer.create(this, R.raw.crowd)
 
         mTextView.text = mViewModel.number.toString()
