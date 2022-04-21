@@ -26,6 +26,8 @@ class MainActivity : AppCompatActivity() {
         mTextView.setTextColor(Color.parseColor(mViewModel.colorCode))
 
         Log.i("MY_INFO", "color: ${mViewModel.colorCode}, number: ${mViewModel.number}")
+
+        // TODO: Implement button to increment counter by 1.
         mScoreButton.setOnClickListener {
             mViewModel.playSound(mMediaPlayer)
             if (mViewModel.number < 15) {
@@ -37,6 +39,7 @@ class MainActivity : AppCompatActivity() {
             Log.i("MY_INFO", "color: ${mViewModel.colorCode}, number: ${mViewModel.number}")
         }
 
+        // TODO: Implement button decrement number by 1.
         mStealButton.setOnClickListener {
             if (mViewModel.number > 0) {
                 mViewModel.number -= 1
@@ -47,6 +50,7 @@ class MainActivity : AppCompatActivity() {
             Log.i("MY_INFO", "color: ${mViewModel.colorCode}, number: ${mViewModel.number}")
         }
 
+        // TODO: Implement button to set number to 0
         mResetButton.setOnClickListener {
             mViewModel.number = 0
             mViewModel.showColorCode()

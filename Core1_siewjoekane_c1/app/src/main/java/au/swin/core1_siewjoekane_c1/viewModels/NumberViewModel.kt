@@ -8,12 +8,14 @@ class NumberViewModel : ViewModel() {
     var number = 0
     var colorCode = "#000000"
 
+    // TODO: Method to play MediaPlayer sound.
     fun playSound(mMediaPlayer: MediaPlayer) {
         if(number == 15) {
             mMediaPlayer.start()
         }
     }
 
+    // TODO: Method to returns color string
     fun showColorCode(): String {
         colorCode = when(number) {
             in 5..9 -> "#0000FF"
