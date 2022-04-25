@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Firstkotlin">
         <activity
+            android:name=".UserRecyclerView"
+            android:exported="false" />
+        <activity
             android:name=".GenshinRecyclerView"
             android:exported="false" />
         <activity

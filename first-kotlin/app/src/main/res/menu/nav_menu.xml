@@ -12,6 +12,7 @@
             <item android:id="@+id/fragment2" android:title="Second Fragment" android:icon="@drawable/secondfragment"/>
             <item android:id="@+id/garden_recycler_activity" android:title="Garden" android:icon="@drawable/flower"/>
             <item android:id="@+id/genshin_recycler_activity" android:title="Genshin" android:icon="@drawable/architecture"/>
+            <item android:id="@+id/users_recyclerview" android:title="Users" android:icon="@drawable/users"/>
         </menu>
     </item>
 </menu>

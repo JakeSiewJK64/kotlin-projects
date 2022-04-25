@@ -6,10 +6,7 @@ import android.content.Intent
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
-import com.example.first_kotlin.CounterActivity
-import com.example.first_kotlin.Flower
-import com.example.first_kotlin.GenshinRecyclerView
-import com.example.first_kotlin.R
+import com.example.first_kotlin.*
 
 class RenderDrawerFragmentService : Activity() {
     companion object {
@@ -43,16 +40,20 @@ class RenderDrawerFragmentService : Activity() {
                 }
                 R.id.garden_recycler_activity -> {
                     Toast.makeText(context, "Garden", Toast.LENGTH_SHORT).show();
-                    val intent = Intent(context, Flower::class.java);
-                    startActivity(context, intent, null);
+                    val intent = Intent(context, Flower::class.java)
+                    startActivity(context, intent, null)
                 }
                 R.id.genshin_recycler_activity -> {
-                    Toast.makeText(context, "Genshin", Toast.LENGTH_SHORT).show();
-                    val intent = Intent(context, GenshinRecyclerView::class.java);
-                    startActivity(context, intent, null);
+                    Toast.makeText(context, "Genshin", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(context, GenshinRecyclerView::class.java)
+                    startActivity(context, intent, null)
+                }
+                R.id.users_recyclerview -> {
+                    Toast.makeText(context, "Genshin", Toast.LENGTH_SHORT).show()
+                    val intent  = Intent(context, UserRecyclerView::class.java)
+                    startActivity(context, intent, null)
                 }
                 else -> {
-                    false;
                 }
             }
         }
