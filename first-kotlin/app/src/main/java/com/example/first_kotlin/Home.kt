@@ -33,7 +33,7 @@ class Home : Fragment(R.layout.fragment_home) {
     }
 
     private fun postUser(name: String, view: View) {
-        val newUser = UserModel(mUserName = name, "welcome123")
+        val newUser = UserModel(muserName = name, "welcome123")
         val docId = db.collection("mUsers").document().id
         db.collection("mUsers").document(docId).set(newUser).addOnSuccessListener {
             Snackbar.make(view, "Saved User", Snackbar.LENGTH_SHORT)

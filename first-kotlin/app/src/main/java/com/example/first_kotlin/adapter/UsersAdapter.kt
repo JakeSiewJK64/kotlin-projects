@@ -16,7 +16,7 @@ class UsersAdapter(private val mUserList: ArrayList<UserModel>) :
     }
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-        holder.bind(mUserList[position].mUserName.toString())
+        holder.bind(mUserList[position].muserName.toString())
     }
 
     override fun getItemCount(): Int {

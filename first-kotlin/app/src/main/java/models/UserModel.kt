@@ -1,6 +1,6 @@
 package models
 
 data class UserModel(
-    val mUserName: String? = "",
-    val mUserPassword: String? = ""
+    val muserName: String? = "",
+    val muserPassword: String? = ""
 )
