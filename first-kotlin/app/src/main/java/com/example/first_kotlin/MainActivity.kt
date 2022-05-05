@@ -14,23 +14,28 @@ import kotlinx.android.synthetic.main.top_app_bar.*
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var drawerLayout: DrawerLayout;
-    private lateinit var actionBarToggle: ActionBarDrawerToggle;
-    private lateinit var navView: NavigationView;
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var actionBarToggle: ActionBarDrawerToggle
+    private lateinit var navView: NavigationView
 
-    private lateinit var bottomNavigation: BottomNavigationView;
+    private lateinit var bottomNavigation: BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        /**
+         * SET DEFAULT FRAGMENT VIEW
+         */
+        RenderBottomNavService.setDefaultFragmentView(supportFragmentManager)
 
         /**
          * BOTTOM NAVIGATION MENU
          */
-        bottomNavigation = bottom_navbar;
+        bottomNavigation = bottom_navbar
         bottomNavigation.setOnItemSelectedListener { i ->
             RenderBottomNavService.renderBottomNav(i.toString(), this, supportFragmentManager)
-            true;
+            true
         }
 
         /**
@@ -44,31 +49,31 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        drawerLayout = findViewById(R.id.drawer_layout);
-        actionBarToggle = ActionBarDrawerToggle(this, drawerLayout, 0, 0);
-        drawerLayout.addDrawerListener(actionBarToggle);
+        drawerLayout = findViewById(R.id.drawer_layout)
+        actionBarToggle = ActionBarDrawerToggle(this, drawerLayout, 0, 0)
+        drawerLayout.addDrawerListener(actionBarToggle)
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(true);
-        actionBarToggle.syncState();
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        actionBarToggle.syncState()
 
-        navView = findViewById(R.id.nav_view);
+        navView = findViewById(R.id.nav_view)
 
         navView.setNavigationItemSelectedListener { menuItem ->
-            RenderDrawerFragmentService.renderDrawerFragmentService(menuItem, this);
-            true;
+            RenderDrawerFragmentService.renderDrawerFragmentService(menuItem, this)
+            true
         }
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        drawerLayout.openDrawer(navView);
-        return true;
+        drawerLayout.openDrawer(navView)
+        return true
     }
 
     override fun onBackPressed() {
         if (this.drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            this.drawerLayout.closeDrawer(GravityCompat.START);
+            this.drawerLayout.closeDrawer(GravityCompat.START)
         } else {
-            super.onBackPressed();
+            super.onBackPressed()
         }
     }
 }

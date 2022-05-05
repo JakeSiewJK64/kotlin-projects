@@ -10,6 +10,13 @@ import com.example.first_kotlin.R
 
 class RenderBottomNavService {
     companion object {
+        fun setDefaultFragmentView(fragmentManager: FragmentManager) {
+            fragmentManager.beginTransaction().apply {
+                replace(R.id.mFragmentFrame, Home())
+                commit()
+            }
+        }
+
         fun renderBottomNav(id: String, context: Context, fragmentManager: FragmentManager) {
             when (id) {
                 "Profile" -> {
@@ -26,14 +33,13 @@ class RenderBottomNavService {
                         commit()
                     }
                 }
-                "Home" -> {
+                else -> {
                     Toast.makeText(context, "Home Clicked!", Toast.LENGTH_SHORT).show()
                     fragmentManager.beginTransaction().apply {
                         replace(R.id.mFragmentFrame, Home())
                         commit()
                     }
                 }
-                else -> false;
             }
         }
     }

@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Firstkotlin">
         <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+        <activity
             android:name=".UserRecyclerView"
             android:exported="false" />
         <activity
@@ -22,7 +25,7 @@
             android:name=".CounterActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Splashscreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

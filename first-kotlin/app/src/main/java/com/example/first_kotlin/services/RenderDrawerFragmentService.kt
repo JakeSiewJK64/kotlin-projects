@@ -13,11 +13,11 @@ class RenderDrawerFragmentService : Activity() {
         fun renderDrawerFragmentService(menuItem: MenuItem, context: Context) {
             when (menuItem.itemId) {
                 R.id.files -> {
-                    Toast.makeText(context, "Files", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Files", Toast.LENGTH_SHORT).show()
                     true
                 }
                 R.id.music -> {
-                    Toast.makeText(context, "Music", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Music", Toast.LENGTH_SHORT).show()
                     true
                 }
                 R.id.connect -> {
@@ -30,16 +30,16 @@ class RenderDrawerFragmentService : Activity() {
                 }
                 R.id.counter -> {
                     Toast.makeText(context, "Counter", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(context, CounterActivity::class.java);
-                    startActivity(context, intent, null);
-                    true;
+                    val intent = Intent(context, CounterActivity::class.java)
+                    startActivity(context, intent, null)
+                    true
                 }
                 R.id.fragment2 -> {
                     Toast.makeText(context, "Fragment2", Toast.LENGTH_SHORT).show()
-                    true;
+                    true
                 }
                 R.id.garden_recycler_activity -> {
-                    Toast.makeText(context, "Garden", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Garden", Toast.LENGTH_SHORT).show()
                     val intent = Intent(context, Flower::class.java)
                     startActivity(context, intent, null)
                 }
