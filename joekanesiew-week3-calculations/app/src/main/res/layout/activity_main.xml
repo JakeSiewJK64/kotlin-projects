@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/valueA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5pt"
+            android:layout_weight="1"
+            android:hint="Insert value A"
+            android:inputType="number" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RadioGroup
+                android:id="@+id/mRadioGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/add_radio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/addition_label" />
+
+                <RadioButton
+                    android:id="@+id/mult_radio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/multiply_label" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/valueB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5pt"
+            android:layout_weight="1"
+            android:hint="Insert value B"
+            android:inputType="number" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button_sum"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_weight="1"
+        android:text="@string/addition_label"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/answer_box"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:background="@color/sunflower"
+        android:text="Sum of A AND B"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="25sp" />
+</LinearLayout>

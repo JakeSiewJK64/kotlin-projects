@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+    <item android:title="STORAGE">
+        <menu>
+            <item android:id="@+id/files" android:title="My Files" android:icon="@drawable/files"/>
+            <item android:id="@+id/music" android:title="Music Queue" android:icon="@drawable/music"/>
+            <item android:id="@+id/print" android:title="Print" android:icon="@drawable/print"/>
+            <item android:id="@+id/connect" android:title="Connect" android:icon="@drawable/globe"/>
+            <item android:id="@+id/counter" android:title="Counter" android:icon="@drawable/counter"/>
+            <item android:id="@+id/fragment2" android:title="Second Fragment" android:icon="@drawable/secondfragment"/>
+            <item android:id="@+id/garden_recycler_activity" android:title="Garden" android:icon="@drawable/flower"/>
+            <item android:id="@+id/genshin_recycler_activity" android:title="Genshin" android:icon="@drawable/architecture"/>
+            <item android:id="@+id/users_recyclerview" android:title="Users" android:icon="@drawable/users"/>
+        </menu>
+    </item>
+</menu>
