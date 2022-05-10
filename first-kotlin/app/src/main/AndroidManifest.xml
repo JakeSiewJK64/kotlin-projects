@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Firstkotlin">
         <activity
+            android:name=".Authentication"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity
