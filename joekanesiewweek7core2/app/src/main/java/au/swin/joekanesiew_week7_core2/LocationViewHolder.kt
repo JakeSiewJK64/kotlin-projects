@@ -12,7 +12,7 @@ class LocationViewHolder(view: View) : RecyclerView.ViewHolder(view){
     private val locationDateTextView: TextView = view.findViewById(R.id.locationDate)
     private val locationTypeTextView: TextView = view.findViewById(R.id.locationType)
 
-    fun bind(locationName: String, locationRating: Int, locationType: String, locationImage: Int, locationDate: String) {
+    fun bind(locationName: String, locationRating: Float, locationType: String, locationImage: Int, locationDate: String) {
         locationNameTextView.text = locationName
         locationDateTextView.text = locationDate
         locationTypeTextView.text = locationType

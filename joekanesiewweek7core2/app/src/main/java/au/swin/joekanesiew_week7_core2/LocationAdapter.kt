@@ -25,9 +25,7 @@ class LocationAdapter(private val context: Context, private val locationList: Ar
                 it.locationImage,
                 it.locationDate,
             )
-            holder.itemView.setOnClickListener { _ ->
-                Snackbar.make(holder.itemView, "Loading ${it.locationName}", Snackbar.LENGTH_LONG)
-                    .show()
+            holder.itemView.setOnClickListener {
                 val mIntent = Intent(context, LocationDetail::class.java)
                 mIntent.putExtra("locationData", locationList[position])
                 startActivity(context, mIntent, null)
