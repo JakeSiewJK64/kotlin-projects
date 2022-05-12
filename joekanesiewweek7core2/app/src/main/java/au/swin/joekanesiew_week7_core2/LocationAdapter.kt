@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.snackbar.Snackbar
 
 class LocationAdapter(private val context: Context, private val locationList: ArrayList<Location>) :
     RecyclerView.Adapter<LocationViewHolder>() {
