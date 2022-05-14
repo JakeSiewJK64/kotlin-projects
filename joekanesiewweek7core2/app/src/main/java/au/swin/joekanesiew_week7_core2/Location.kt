@@ -9,5 +9,6 @@ data class Location(
     val locationRating: Float,
     val locationDate: String,
     val locationType: String,
-    val locationImage: Int
+    val locationImage: Int ,
+    val favorite: Boolean
 ): Parcelable

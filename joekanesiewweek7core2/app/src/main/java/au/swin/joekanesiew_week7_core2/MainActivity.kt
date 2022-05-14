@@ -16,10 +16,10 @@ class MainActivity : AppCompatActivity() {
 
         locationArrayList = ArrayList()
         locationRecyclerView = findViewById(R.id.locationRecyclerView)
-        locationArrayList.add(Location("Shibuya", 5f, "5/5/2022", "City", R.drawable.shibuya))
-        locationArrayList.add(Location("Tokyo", 4f, "6/5/2022", "City", R.drawable.tokyo))
-        locationArrayList.add(Location("Kyoto", 3f, "7/5/2022", "City", R.drawable.kyoto))
-        locationArrayList.add(Location("Osaka", 2f, "8/5/2022", "City", R.drawable.osaka))
+        locationArrayList.add(Location("Shibuya", 5f, "5/5/2022", "City", R.drawable.shibuya, true))
+        locationArrayList.add(Location("Tokyo", 4f, "6/5/2022", "City", R.drawable.tokyo, true))
+        locationArrayList.add(Location("Kyoto", 3f, "7/5/2022", "City", R.drawable.kyoto, false))
+        locationArrayList.add(Location("Osaka", 2f, "8/5/2022", "City", R.drawable.osaka, false))
 
         val locationAdapter = LocationAdapter(this, locationArrayList)
         val layoutManager = GridLayoutManager(this, 2)
