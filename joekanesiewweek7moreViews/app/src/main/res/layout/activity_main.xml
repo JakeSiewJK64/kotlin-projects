@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/myUsernameLayout"
+            app:helperTextEnabled="true"
+            app:helperText="Required"
+            app:counterEnabled="true"
+            app:helperTextTextColor="@color/red"
+            app:counterMaxLength="10"
+            app:errorEnabled="true"
+            app:errorTextColor="@color/red"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            app:startIconDrawable="@drawable/person_icon"
+            android:layout_height="wrap_content"
+            app:endIconMode="clear_text"
+            android:padding="10dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/myUsernameEditText"
+                android:layout_width="match_parent"
+                android:maxLength="10"
+                android:inputType="text"
+                android:layout_height="match_parent"
+                android:hint="Username" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/myAge"
+            app:helperTextEnabled="true"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            app:startIconDrawable="@drawable/ic_baseline_calendar_month_24"
+            android:layout_height="wrap_content"
+            app:endIconMode="clear_text"
+            android:padding="10dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:maxLength="10"
+                android:inputType="number"
+                android:layout_height="match_parent"
+                android:hint="Age" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/myEmail"
+            app:startIconDrawable="@drawable/mail_icon"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true"
+            app:helperTextEnabled="true"
+            app:helperTextTextColor="@color/red"
+            app:helperText="Required"
+            android:padding="10dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textEmailAddress"
+                android:hint="Email" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/myPassword"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            app:startIconDrawable="@drawable/lock_icon"
+            android:layout_height="wrap_content"
+            app:counterEnabled="true"
+            app:helperTextEnabled="true"
+            app:helperText="Required"
+            app:helperTextTextColor="@color/red"
+            android:padding="10dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Password"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/mSubmitButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Submit" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
