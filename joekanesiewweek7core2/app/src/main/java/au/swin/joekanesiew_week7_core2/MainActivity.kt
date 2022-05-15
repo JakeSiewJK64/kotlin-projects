@@ -3,28 +3,30 @@ package au.swin.joekanesiew_week7_core2
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RatingBar
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 
 class MainActivity : AppCompatActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+    private var myJapan = ArrayList<Location>()
 
-        val myJapan = ArrayList<Location>()
-        myJapan.add(Location(0, "Shibuya", 5f, "5/5/2022", "City", R.drawable.shibuya, true))
-        myJapan.add(Location(1, "Tokyo", 4f, "6/5/2022", "City", R.drawable.tokyo, true))
-        myJapan.add(Location(2, "Kyoto", 3f, "3/5/2022", "City", R.drawable.kyoto, false))
-        myJapan.add(Location(3, "Osaka", 2f, "1/5/2022", "City", R.drawable.osaka, false))
-
-        val shibuyaLinear: LinearLayout = findViewById(R.id.shibuyaLayout)
-        val tokyoLinear: LinearLayout = findViewById(R.id.tokyoLayout)
-        val kyotoLinear: LinearLayout = findViewById(R.id.kyotoLayout)
-        val osakaLinear: LinearLayout = findViewById(R.id.osakaLayout)
-
+    private val resultContract =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == RESULT_OK) {
+                val data: Intent? = it.data
+                val updatedLocation = data?.getParcelableExtra<Location>("UPDATED_LOCATION")
+                updatedLocation?.let { res ->
+                    myJapan.set(res.locationId, res)
+                }
+                updateView()
+            }
+        }
+    
+    private fun updateView() {
         findViewById<TextView>(R.id.shibuyaText).text = myJapan[0].locationName
         findViewById<TextView>(R.id.tokyoText).text = myJapan[1].locationName
         findViewById<TextView>(R.id.kyotoText).text = myJapan[2].locationName
@@ -44,6 +46,27 @@ class MainActivity : AppCompatActivity() {
         findViewById<ImageView>(R.id.tokyoImage).setImageResource(myJapan[1].locationImage)
         findViewById<ImageView>(R.id.kyotoImage).setImageResource(myJapan[2].locationImage)
         findViewById<ImageView>(R.id.osakaImage).setImageResource(myJapan[3].locationImage)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        Log.i("SOMETHING_HAPPENED", "ON CREATE CALLED")
+
+        if (myJapan.isEmpty()) {
+            Log.i("SOMETHING_HAPPENED", "ASSIGNED VALUES TO MYJAPAN")
+            myJapan.add(Location(0, "Shibuya", 5f, "5/5/2022", "City", R.drawable.shibuya, true))
+            myJapan.add(Location(1, "Tokyo", 4f, "6/5/2022", "City", R.drawable.tokyo, true))
+            myJapan.add(Location(2, "Kyoto", 3f, "3/5/2022", "City", R.drawable.kyoto, false))
+            myJapan.add(Location(3, "Osaka", 2f, "1/5/2022", "City", R.drawable.osaka, false))
+            updateView()
+        }
+
+        val shibuyaLinear: LinearLayout = findViewById(R.id.shibuyaLayout)
+        val tokyoLinear: LinearLayout = findViewById(R.id.tokyoLayout)
+        val kyotoLinear: LinearLayout = findViewById(R.id.kyotoLayout)
+        val osakaLinear: LinearLayout = findViewById(R.id.osakaLayout)
 
         shibuyaLinear.setOnClickListener {
             initiateActivity(myJapan[0])
@@ -65,6 +88,6 @@ class MainActivity : AppCompatActivity() {
     private fun initiateActivity(mLocation: Location) {
         val i = Intent(this, LocationDetail::class.java)
         i.putExtra("LOCATION_JAPAN", mLocation)
-        startActivity(i)
+        resultContract.launch(i)
     }
 }
