@@ -5,6 +5,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Location(
+    val locationId: Int,
     val locationName: String,
     val locationRating: Float,
     val locationDate: String,
