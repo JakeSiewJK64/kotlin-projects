@@ -37,6 +37,7 @@
 
                 <TextView
                     android:id="@+id/kyotoText"
+                    style="@style/Theme.CustomStyle1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Kyoto" />
@@ -73,6 +74,7 @@
 
                 <TextView
                     android:id="@+id/shibuyaText"
+                    style="@style/Theme.CustomStyle2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Shibuya" />
@@ -118,6 +120,7 @@
 
                 <TextView
                     android:id="@+id/tokyoText"
+                    style="@style/Theme.CustomStyle3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Tokyo" />
@@ -156,6 +159,7 @@
                     android:id="@+id/osakaText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    style="@style/Theme.CustomStyle4"
                     android:text="Osaka" />
 
                 <TextView
