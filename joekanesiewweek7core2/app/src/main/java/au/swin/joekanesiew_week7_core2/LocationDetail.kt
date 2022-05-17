@@ -29,7 +29,6 @@ class LocationDetail : AppCompatActivity() {
     }
 
     private fun validateInput(): Boolean {
-
         val lDate: String = locationDateInputEditText.editText?.text.toString()
         val lName: String = locationNameInputEditText.editText?.text.toString()
         val lType: String = locationTypeInputEditText.editText?.text.toString()
@@ -47,7 +46,6 @@ class LocationDetail : AppCompatActivity() {
             locationDateInputEditText.error = "Invalid Location Date. Please enter day/month/year format."
             return false
         }
-
         return true
     }
 

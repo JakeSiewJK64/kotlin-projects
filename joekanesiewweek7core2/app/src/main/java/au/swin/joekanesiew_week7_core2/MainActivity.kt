@@ -56,10 +56,10 @@ class MainActivity : AppCompatActivity() {
 
         if (myJapan.isEmpty()) {
             Log.i("SOMETHING_HAPPENED", "ASSIGNED VALUES TO MYJAPAN")
-            myJapan.add(Location(0, "Shibuya", 5f, "5/5/2022", "City", R.drawable.shibuya, true))
-            myJapan.add(Location(1, "Tokyo", 4f, "6/5/2022", "City", R.drawable.tokyo, true))
-            myJapan.add(Location(2, "Kyoto", 3f, "3/5/2022", "City", R.drawable.kyoto, false))
-            myJapan.add(Location(3, "Osaka", 2f, "1/5/2022", "City", R.drawable.osaka, false))
+            myJapan.add(Location(0, "Shibuya", 5f, "05/05/2022", "City", R.drawable.shibuya, true))
+            myJapan.add(Location(1, "Tokyo", 4f, "06/05/2022", "City", R.drawable.tokyo, true))
+            myJapan.add(Location(2, "Kyoto", 3f, "30/05/2022", "City", R.drawable.kyoto, false))
+            myJapan.add(Location(3, "Osaka", 2f, "10/05/2022", "City", R.drawable.osaka, false))
             updateView()
         }
 

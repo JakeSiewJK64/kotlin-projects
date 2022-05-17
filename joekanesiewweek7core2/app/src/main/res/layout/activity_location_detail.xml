@@ -86,17 +86,17 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <RatingBar
-            android:id="@+id/locationDetailRatingBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:theme="@style/Theme.LocationRatingBar" />
-
         <CheckBox
             android:id="@+id/favoriteLocationCheckbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Favorite" />
+
+        <RatingBar
+            android:id="@+id/locationDetailRatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:theme="@style/Theme.LocationRatingBar" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
