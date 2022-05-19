@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 
-class Fragment2 : Fragment(R.layout.fragment_2) {
+class Fragment2 : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -15,8 +15,8 @@ class Fragment2 : Fragment(R.layout.fragment_2) {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_2, container, false)
         val args = this.arguments
-        val inputData = args?.getString("NAME")
         val textResult = view.findViewById<TextView>(R.id.f2Text)
+        val inputData = args?.getString("NAME")
         textResult.text = "Welcome ${inputData.toString()} to fragment 2"
         return view
     }
