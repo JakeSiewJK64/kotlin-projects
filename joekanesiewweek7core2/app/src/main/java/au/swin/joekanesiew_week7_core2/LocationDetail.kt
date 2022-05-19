@@ -28,27 +28,32 @@ class LocationDetail : AppCompatActivity() {
             .show()
     }
 
+    // validates the input of the edit text
     private fun validateInput(): Boolean {
         val lDate: String = locationDateInputEditText.editText?.text.toString()
         val lName: String = locationNameInputEditText.editText?.text.toString()
         val lType: String = locationTypeInputEditText.editText?.text.toString()
 
         if (!lName.matches(Regex(pattern = "[A-Za-z]+"))) {
-            displaySnackbar("Invalid Location Name")
-            locationNameInputEditText.error = "Invalid Location Name. Must not contain special characters and numbers."
+            displaySnackbar(resources.getString(R.string.snackbar_invalidName))
+            locationNameInputEditText.error = resources.getString(R.string.invalidName)
             return false
         } else if (!lType.matches(Regex(pattern = "[A-Za-z]+"))) {
-            displaySnackbar("Invalid Location Type")
-            locationTypeInputEditText.error = "Invalid Location. Must not contain special characters and numbers."
+            displaySnackbar(resources.getString(R.string.snackbar_invalidType))
+            locationTypeInputEditText.error = resources.getString(R.string.invalidType)
             return false
         } else if (!lDate.matches(Regex(pattern = """([0][1-9]|[1-2][0-9]|[3][0-1])/([0][1-9]|[1][0-2])/[0-2][0][2][0-9]+"""))) {
-            displaySnackbar("Invalid Location Date")
-            locationDateInputEditText.error = "Invalid Location Date. Please enter day/month/year format."
+            displaySnackbar(resources.getString(R.string.snackbar_invalidDate))
+            locationDateInputEditText.error = resources.getString(R.string.invalidDate)
             return false
         }
         return true
     }
 
+    // when back button is pressed, validateInput method is called to check validity of data entered.
+    // if not valid, dont proceed back to main activity.
+    // if valid, store the updated data into UPDATED_LOCATION key string using putExtra.
+    // use setResult  instead of startActivity method and pass in the status and intent.
     override fun onBackPressed() {
         if (validateInput()) {
             val updatedLocation = Location(
@@ -82,6 +87,8 @@ class LocationDetail : AppCompatActivity() {
         locationDateInputEditText = findViewById(R.id.locationDateEditTextLayout)
         locationTypeInputEditText = findViewById(R.id.locationTypeEditTextLayout)
 
+        // getParcelableExtra method is used to fetch data from the intent.
+        // ? question mark is used because data could contain null values.
         intent.getParcelableExtra<Location>("LOCATION_JAPAN")?.let {
             locationImageView.setImageResource(it.locationImage)
             locationNameInputEditText.editText?.setText(it.locationName)

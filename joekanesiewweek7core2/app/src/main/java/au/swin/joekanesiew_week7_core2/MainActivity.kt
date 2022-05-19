@@ -14,6 +14,8 @@ class MainActivity : AppCompatActivity() {
 
     private var myJapan = ArrayList<Location>()
 
+    // creates activity result contract. any data in the inputs from the detail page
+    // can be passed back to the main activity
     private val resultContract =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (it.resultCode == RESULT_OK) {
@@ -25,7 +27,8 @@ class MainActivity : AppCompatActivity() {
                 updateView()
             }
         }
-    
+
+    // updates the view data
     private fun updateView() {
         findViewById<TextView>(R.id.shibuyaText).text = myJapan[0].locationName
         findViewById<TextView>(R.id.tokyoText).text = myJapan[1].locationName
@@ -54,12 +57,13 @@ class MainActivity : AppCompatActivity() {
 
         Log.i("SOMETHING_HAPPENED", "ON CREATE CALLED")
 
+        // checks if the array is empty, if so, populate it with data
         if (myJapan.isEmpty()) {
             Log.i("SOMETHING_HAPPENED", "ASSIGNED VALUES TO MYJAPAN")
-            myJapan.add(Location(0, "Shibuya", 5f, "05/05/2022", "City", R.drawable.shibuya, true))
-            myJapan.add(Location(1, "Tokyo", 4f, "06/05/2022", "City", R.drawable.tokyo, true))
-            myJapan.add(Location(2, "Kyoto", 3f, "30/05/2022", "City", R.drawable.kyoto, false))
-            myJapan.add(Location(3, "Osaka", 2f, "10/05/2022", "City", R.drawable.osaka, false))
+            myJapan.add(Location(0, resources.getString(R.string.shibuya), 5f, resources.getString(R.string.sample_date), resources.getString(R.string.city_type), R.drawable.shibuya, true))
+            myJapan.add(Location(1, resources.getString(R.string.tokyo), 4f, resources.getString(R.string.sample_date), resources.getString(R.string.city_type), R.drawable.tokyo, true))
+            myJapan.add(Location(2, resources.getString(R.string.kyoto), 3f, resources.getString(R.string.sample_date), resources.getString(R.string.city_type), R.drawable.kyoto, false))
+            myJapan.add(Location(3, resources.getString(R.string.osaka), 2f, resources.getString(R.string.sample_date), resources.getString(R.string.city_type), R.drawable.osaka, false))
             updateView()
         }
 
@@ -85,6 +89,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // initiates the activity using intent.
+    // putExtra method is used to store location data class object into LOCATION_JAPAN key string.
     private fun initiateActivity(mLocation: Location) {
         val i = Intent(this, LocationDetail::class.java)
         i.putExtra("LOCATION_JAPAN", mLocation)

@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">joekanesiew-week7-core2</string>
+    <string name="shibuya">Shibuya</string>
+    <string name="kyoto">Kyoto</string>
+    <string name="tokyo">Tokyo</string>
+    <string name="osaka">Osaka</string>
+    <string name="sample_date">05/05/2022</string>
+    <string name="city_type">City</string>
+
+    <string name="snackbar_invalidName">Invalid Location Name</string>
+    <string name="snackbar_invalidDate">Invalid Location Date</string>
+    <string name="snackbar_invalidType">Invalid Location Type</string>
+
+    <string name="invalidType">Invalid Location Type. Must not contain special characters and numbers.</string>
+    <string name="invalidName">Invalid Location Name. Must not contain special characters and numbers.</string>
+    <string name="invalidDate">Invalid Location Date. Please enter day/month/year format.</string>
+
 </resources>
