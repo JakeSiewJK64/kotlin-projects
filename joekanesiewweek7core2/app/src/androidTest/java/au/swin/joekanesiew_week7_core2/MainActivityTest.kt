@@ -27,7 +27,7 @@ class MainActivityTest {
      */
     @Test
     fun testClickingLayoutWillDirectToDetailActivity() {
-        val locationLayout = onView(withId(R.id.kyotoLayout))
+        val locationLayout = onView(withId(R.id.kyotoImage))
         val detailLocationActivty = onView(withId(R.id.locationDetailLayout))
         locationLayout.perform(click())
         detailLocationActivty.check(matches(isDisplayed()))
@@ -38,7 +38,7 @@ class MainActivityTest {
      */
     @Test
     fun testBackButtonWorks() {
-        val locationLayout = onView(withId(R.id.kyotoLayout))
+        val locationLayout = onView(withId(R.id.kyotoImage))
         val locationMainMenu = onView(withId(R.id.locationMainMenu))
         locationLayout.perform(click())
         pressBack()
@@ -50,7 +50,7 @@ class MainActivityTest {
      */
     @Test
     fun testFavoriteRemainsChecked() {
-        val locationLayout = onView(withId(R.id.kyotoLayout))
+        val locationLayout = onView(withId(R.id.kyotoImage))
         val myCheckBox = onView(withId(R.id.favoriteLocationCheckbox))
         locationLayout.perform(click())
         myCheckBox.perform(click())
@@ -64,7 +64,7 @@ class MainActivityTest {
      */
     @Test
     fun testSnackbarDisplayed() {
-        val locationLayout = onView(withId(R.id.kyotoLayout))
+        val locationLayout = onView(withId(R.id.kyotoImage))
         val mySnackbar = onView(withText("Loaded Kyoto Successfully!"))
         locationLayout.perform(click())
         mySnackbar.check(matches(isDisplayed()))
@@ -76,7 +76,7 @@ class MainActivityTest {
     @Test
     fun testInputEditTextLocationNameMaintains() {
         val locationName = onView(withId(R.id.locationDetailName))
-        val locationLayout = onView(withId(R.id.kyotoLayout))
+        val locationLayout = onView(withId(R.id.kyotoImage))
         val matchString = "Kyotoooooooooooo"
         locationLayout.perform(click())
         locationName.perform(replaceText(matchString))
@@ -90,12 +90,27 @@ class MainActivityTest {
      */
     @Test
     fun testInputValidationLocationDate() {
-        val locationLayout = onView(withId(R.id.kyotoLayout))
+        val locationLayout = onView(withId(R.id.kyotoImage))
         val locationDate = onView(withId(R.id.locationDetailDate))
         val errorSnackbar = onView(withText("Invalid Location Date"))
         locationLayout.perform(click())
         locationDate.perform(replaceText("17/5/2022"))
         pressBack()
         errorSnackbar.check(matches(isDisplayed()))
+    }
+
+    /**
+     * [TEST]: WHETHER CHANGE IN ACTIVITY 2 IS REFLECTED IN ACTIVITY 1.
+     */
+    @Test
+    fun testActivity2IsReflectedInActivity1() {
+        val locationDetailName = onView(withId(R.id.locationDetailName))
+        val locationLayout = onView(withId(R.id.kyotoImage))
+        val locationName = onView(withId(R.id.kyotoText))
+        val matchString = "Kyotoooooooooooo"
+        locationLayout.perform(click())
+        locationDetailName.perform(replaceText(matchString))
+        pressBack()
+        locationName.check(matches(withText(matchString)))
     }
 }

@@ -5,14 +5,19 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
 
     private var myJapan = ArrayList<Location>()
+
+    private lateinit var shibuyaLinear: ImageView
+    private lateinit var tokyoLinear: ImageView
+    private lateinit var kyotoLinear: ImageView
+    private lateinit var osakaLinear: ImageView
 
     // creates activity result contract. any data in the inputs from the detail page
     // can be passed back to the main activity
@@ -22,7 +27,14 @@ class MainActivity : AppCompatActivity() {
                 val data: Intent? = it.data
                 val updatedLocation = data?.getParcelableExtra<Location>("UPDATED_LOCATION")
                 updatedLocation?.let { res ->
-                    myJapan.set(res.locationId, res)
+                    if (res.toString() != myJapan[res.locationId].toString()) {
+                        myJapan[res.locationId] = res
+                        Snackbar.make(
+                            findViewById(R.id.mainActivityConstraintLayout),
+                            "Saved changes successfully!",
+                            Snackbar.LENGTH_LONG
+                        ).show()
+                    }
                 }
                 updateView()
             }
@@ -45,33 +57,76 @@ class MainActivity : AppCompatActivity() {
         findViewById<RatingBar>(R.id.kyotoRating).rating = myJapan[2].locationRating
         findViewById<RatingBar>(R.id.osakaRating).rating = myJapan[3].locationRating
 
-        findViewById<ImageView>(R.id.shibuyaImage).setImageResource(myJapan[0].locationImage)
-        findViewById<ImageView>(R.id.tokyoImage).setImageResource(myJapan[1].locationImage)
-        findViewById<ImageView>(R.id.kyotoImage).setImageResource(myJapan[2].locationImage)
-        findViewById<ImageView>(R.id.osakaImage).setImageResource(myJapan[3].locationImage)
+        shibuyaLinear.setImageResource(myJapan[0].locationImage)
+        tokyoLinear.setImageResource(myJapan[1].locationImage)
+        kyotoLinear.setImageResource(myJapan[2].locationImage)
+        osakaLinear.setImageResource(myJapan[3].locationImage)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        shibuyaLinear = findViewById(R.id.shibuyaImage)
+        tokyoLinear = findViewById(R.id.tokyoImage)
+        kyotoLinear = findViewById(R.id.kyotoImage)
+        osakaLinear = findViewById(R.id.osakaImage)
+
         Log.i("SOMETHING_HAPPENED", "ON CREATE CALLED")
 
         // checks if the array is empty, if so, populate it with data
         if (myJapan.isEmpty()) {
             Log.i("SOMETHING_HAPPENED", "ASSIGNED VALUES TO MYJAPAN")
-            myJapan.add(Location(0, resources.getString(R.string.shibuya), 5f, resources.getString(R.string.sample_date), resources.getString(R.string.city_type), R.drawable.shibuya, true))
-            myJapan.add(Location(1, resources.getString(R.string.tokyo), 4f, resources.getString(R.string.sample_date), resources.getString(R.string.city_type), R.drawable.tokyo, true))
-            myJapan.add(Location(2, resources.getString(R.string.kyoto), 3f, resources.getString(R.string.sample_date), resources.getString(R.string.city_type), R.drawable.kyoto, false))
-            myJapan.add(Location(3, resources.getString(R.string.osaka), 2f, resources.getString(R.string.sample_date), resources.getString(R.string.city_type), R.drawable.osaka, false))
+            myJapan.apply {
+                add(
+                    Location(
+                        0,
+                        resources.getString(R.string.shibuya),
+                        5f,
+                        resources.getString(R.string.sample_date),
+                        resources.getString(R.string.city_type),
+                        R.drawable.shibuya,
+                        true
+                    )
+                )
+                add(
+                    Location(
+                        1,
+                        resources.getString(R.string.tokyo),
+                        4f,
+                        resources.getString(R.string.sample_date),
+                        resources.getString(R.string.city_type),
+                        R.drawable.tokyo,
+                        true
+                    )
+                )
+                add(
+                    Location(
+                        2,
+                        resources.getString(R.string.kyoto),
+                        3f,
+                        resources.getString(R.string.sample_date),
+                        resources.getString(R.string.city_type),
+                        R.drawable.kyoto,
+                        false
+                    )
+                )
+                add(
+                    Location(
+                        3,
+                        resources.getString(R.string.osaka),
+                        2f,
+                        resources.getString(R.string.sample_date),
+                        resources.getString(R.string.city_type),
+                        R.drawable.osaka,
+                        false
+                    )
+                )
+            }
             updateView()
         }
 
-        val shibuyaLinear: LinearLayout = findViewById(R.id.shibuyaLayout)
-        val tokyoLinear: LinearLayout = findViewById(R.id.tokyoLayout)
-        val kyotoLinear: LinearLayout = findViewById(R.id.kyotoLayout)
-        val osakaLinear: LinearLayout = findViewById(R.id.osakaLayout)
-
+        // on click listener to detect user click interaction
         shibuyaLinear.setOnClickListener {
             initiateActivity(myJapan[0])
         }

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/mainActivityConstraintLayout"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -21,7 +22,6 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:id="@+id/kyotoLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -58,7 +58,6 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/shibuyaLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -104,7 +103,6 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:id="@+id/tokyoLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -141,7 +139,6 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/osakaLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"

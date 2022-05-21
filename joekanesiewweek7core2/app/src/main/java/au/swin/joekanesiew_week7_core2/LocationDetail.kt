@@ -3,6 +3,7 @@ package au.swin.joekanesiew_week7_core2
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.*
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
@@ -87,10 +88,18 @@ class LocationDetail : AppCompatActivity() {
         locationDateInputEditText = findViewById(R.id.locationDateEditTextLayout)
         locationTypeInputEditText = findViewById(R.id.locationTypeEditTextLayout)
 
-        // getParcelableExtra method is used to fetch data from the intent.
-        // ? question mark is used because data could contain null values.
+        /**
+         * 1. getParcelableExtra method is used to fetch data from the intent.
+         *    ? question mark is used because data could contain null values.
+         * 2. getParcelableExtra must retrieve data from LOCATION_JAPAN otherwise
+         *    will return null values.
+         */
         intent.getParcelableExtra<Location>("LOCATION_JAPAN")?.let {
+
+            Log.i("DATA", it.toString())
+
             locationImageView.setImageResource(it.locationImage)
+
             locationNameInputEditText.editText?.setText(it.locationName)
             locationTypeInputEditText.editText?.setText(it.locationType)
             locationDateInputEditText.editText?.setText(it.locationDate)
