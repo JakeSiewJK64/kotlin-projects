@@ -5,14 +5,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-class MedalistAdapter(private val medalList: ArrayList<Medalist>) : RecyclerView.Adapter<MeadalistViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MeadalistViewHolder {
+class MedalistAdapter(private val medalList: ArrayList<Medalist>) : RecyclerView.Adapter<MedalistViewHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MedalistViewHolder {
         val layoutInflater: LayoutInflater = LayoutInflater.from(parent.context)
         val view = layoutInflater.inflate(R.layout.medalistviewmodel, parent, false) as View
-        return MeadalistViewHolder(view)
+        return MedalistViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: MeadalistViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MedalistViewHolder, position: Int) {
         holder.bind(medalList[position])
     }
 
