@@ -1,11 +1,11 @@
 package au.swin.joekanesiew_core3
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.core.text.isDigitsOnly
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,7 +19,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        Toast.makeText(this, "Menu Clicked1", Toast.LENGTH_LONG).show()
+        val i = Intent(this, MedalistHistory::class.java)
+        startActivity(i)
         return super.onOptionsItemSelected(item)
     }
 
