@@ -2,27 +2,40 @@ package au.swin.joekanesiew_core3
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.widget.Toast
+import androidx.core.text.isDigitsOnly
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import java.io.BufferedReader
-import java.io.FileInputStream
-import java.io.InputStreamReader
 
 class MainActivity : AppCompatActivity() {
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.medalistmenu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        Toast.makeText(this, "Menu Clicked1", Toast.LENGTH_LONG).show()
+        return super.onOptionsItemSelected(item)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-        resources.openRawResource(R.raw.)
-        val myMedalistList = ArrayList<Medalist> ()
-        myMedalistList.let {
-            it.add(Medalist("a", 1))
-            it.add(Medalist("b", 2))
-            it.add(Medalist("c", 3))
-        }
+        val myMedalistList = ArrayList<Medalist>()
         val medalistAdapter = MedalistAdapter(myMedalistList)
         val mMedalistRecyclerView: RecyclerView = findViewById(R.id.mRecyclerView)
+        resources.openRawResource(R.raw.medallists).bufferedReader().forEachLine {
+            val temp = it.split(",")
+            if (temp[3].isDigitsOnly()) {
+                myMedalistList.add(Medalist(temp[0], temp[3].toInt()))
+            }
+        }
         mMedalistRecyclerView.adapter = medalistAdapter
         mMedalistRecyclerView.layoutManager = LinearLayoutManager(this)
     }
