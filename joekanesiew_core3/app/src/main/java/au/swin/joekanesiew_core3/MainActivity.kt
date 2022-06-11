@@ -29,14 +29,31 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val myMedalistList = ArrayList<Medalist>()
-        val medalistAdapter = MedalistAdapter(myMedalistList)
+        val medalistAdapter = MedalistAdapter(myMedalistList, supportFragmentManager)
         val mMedalistRecyclerView: RecyclerView = findViewById(R.id.mRecyclerView)
+
         resources.openRawResource(R.raw.medallists).bufferedReader().forEachLine {
             val temp = it.split(",")
             if (temp[3].isDigitsOnly()) {
-                myMedalistList.add(Medalist(temp[0], temp[3].toInt()))
+                myMedalistList.add(
+                    Medalist(
+                        temp[0],
+                        temp[3].toInt(),
+                        temp[4].toInt(),
+                        temp[5].toInt(),
+                        temp[1]
+                    )
+                )
             }
         }
+
+        myMedalistList.sortByDescending { i -> i.totalMedals }
+        myMedalistList.forEachIndexed { index, medalist ->
+            if (index < 10) {
+                medalist.isTop10 = true
+            }
+        }
+
         mMedalistRecyclerView.adapter = medalistAdapter
         mMedalistRecyclerView.layoutManager = LinearLayoutManager(this)
     }
