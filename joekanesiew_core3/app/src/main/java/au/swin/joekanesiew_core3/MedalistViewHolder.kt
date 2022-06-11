@@ -35,8 +35,9 @@ class MedalistViewHolder(private val view: View) : RecyclerView.ViewHolder(view)
             b.arguments = bundle
             b.show(supportFragmentManager, "MEDALIST")
 
-            // stores clicked country name into shared preferences
-            editSharedPref.putString("LAST_CLICKED", medalist.medalistName)
+            // todo: stores clicked country name into shared preferences
+            editSharedPref.putString("LAST_CLICKED_COUNTRY_NAME", medalist.medalistName)
+            editSharedPref.putString("LAST_CLICKED_COUNTRY_IOC", medalist.IOC)
             editSharedPref.apply()
         }
     }

@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">joekanesiew_core3</string>
-    <string name="medalist_details_name">The last clicked country was </string>
+    <string name="medalist_details_name">The last clicked country was %1$s (%2$s)</string>
     <string name="gold_medals">%1$d gold medals</string>
     <string name="silver_medals">%1$d silver medals</string>
     <string name="bronze_medals">%1$d bronze medals</string>

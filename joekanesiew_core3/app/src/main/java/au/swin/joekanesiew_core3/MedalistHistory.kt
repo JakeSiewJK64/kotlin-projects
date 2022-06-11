@@ -10,7 +10,11 @@ class MedalistHistory : AppCompatActivity() {
         setContentView(R.layout.activity_medalist_history)
         val sharedPref = getSharedPreferences("LastClickedMedalist", MODE_PRIVATE)
         val medalistTextView: TextView = findViewById(R.id.medalistDetailsName)
-        val mString = resources.getString(R.string.medalist_details_name) + " " + sharedPref.getString("LAST_CLICKED", null)
+        val mString = String.format(
+            resources.getString(R.string.medalist_details_name),
+            sharedPref.getString("LAST_CLICKED_COUNTRY_NAME", null),
+            sharedPref.getString("LAST_CLICKED_COUNTRY_IOC", null),
+        )
         medalistTextView.text = mString
     }
 }
