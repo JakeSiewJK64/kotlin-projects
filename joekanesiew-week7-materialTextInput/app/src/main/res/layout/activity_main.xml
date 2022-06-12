@@ -14,27 +14,27 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/myUsernameLayout"
-            app:helperTextEnabled="true"
-            app:helperText="Required"
-            app:counterEnabled="true"
-            app:helperTextTextColor="@color/red"
-            app:counterMaxLength="10"
-            app:errorEnabled="true"
-            app:errorTextColor="@color/red"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
-            app:startIconDrawable="@drawable/person_icon"
             android:layout_height="wrap_content"
+            android:padding="10dp"
+            app:counterEnabled="true"
+            app:counterMaxLength="10"
             app:endIconMode="clear_text"
-            android:padding="10dp">
+            app:errorEnabled="true"
+            app:errorTextColor="@color/red"
+            app:helperText="Required"
+            app:helperTextEnabled="true"
+            app:helperTextTextColor="@color/red"
+            app:startIconDrawable="@drawable/person_icon">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/myUsernameEditText"
                 android:layout_width="match_parent"
-                android:maxLength="10"
-                android:inputType="text"
                 android:layout_height="match_parent"
-                android:hint="Username" />
+                android:hint="Username"
+                android:inputType="text"
+                android:maxLength="10" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
