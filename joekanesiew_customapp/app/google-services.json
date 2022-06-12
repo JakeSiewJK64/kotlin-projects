@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "125494017086",
+    "project_id": "jakesiewjk64-customapp",
+    "storage_bucket": "jakesiewjk64-customapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:125494017086:android:50c9df38203cac166da56f",
+        "android_client_info": {
+          "package_name": "au.swin.joekanesiew_customapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "125494017086-usruhfg6u2pvcn61r4rjmes54l6vo651.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgIhoLx-6jHJzN1vjdXwqRikJK7DYhHQw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "125494017086-usruhfg6u2pvcn61r4rjmes54l6vo651.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
