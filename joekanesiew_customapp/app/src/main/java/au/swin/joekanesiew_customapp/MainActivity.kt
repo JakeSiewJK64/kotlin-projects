@@ -1,5 +1,6 @@
 package au.swin.joekanesiew_customapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -54,6 +55,11 @@ class MainActivity : AppCompatActivity() {
         recipeNameInput = findViewById(R.id.recipeNameInput)
         recipeDescInput = findViewById(R.id.recipeDescInput)
         recipeStepsInput = findViewById(R.id.recipeStepsInput)
+
+        findViewById<Button>(R.id.recipeListButton).setOnClickListener {
+            val i = Intent(this, RecipeList::class.java)
+            startActivity(i)
+        }
 
         submitButton.setOnClickListener {
             insertData(

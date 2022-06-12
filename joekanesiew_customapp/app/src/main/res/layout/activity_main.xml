@@ -97,6 +97,14 @@
             android:layout_gravity="center"
             android:text="@string/submit_recipe" />
 
+        <Button
+            android:id="@+id/recipeListButton"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="View Recipe" />
+
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

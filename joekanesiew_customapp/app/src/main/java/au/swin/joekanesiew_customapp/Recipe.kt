@@ -1,7 +1,7 @@
 package au.swin.joekanesiew_customapp
 
 data class Recipe(
-    val RecipeName: String? = "",
-    val RecipeDescription: String? = "",
-    val RecipeSteps: String? = ""
+    var RecipeName: String? = "",
+    var RecipeDescription: String? = "",
+    var RecipeSteps: String? = ""
 )
