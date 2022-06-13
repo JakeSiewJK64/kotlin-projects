@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item
-        android:id="@+id/drawerIcon"
-        android:title="Add Recipe" />
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+    <item android:title="My Recipe">
+        <menu>
+            <item
+                android:id="@+id/newRecipe"
+                android:icon="@drawable/recipe"
+                android:title="Add Recipe" />
+        </menu>
+    </item>
 </menu>

@@ -5,4 +5,6 @@
     <string name="recipe_steps">Recipe Steps</string>
     <string name="add_new_recipe">Add New Recipe</string>
     <string name="submit_recipe">Submit Recipe</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

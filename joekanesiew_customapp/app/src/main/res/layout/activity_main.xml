@@ -6,12 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <include layout="@layout/top_app_bar" />
+        <include layout="@layout/drawer_nav" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -107,6 +108,6 @@
             android:layout_gravity="center"
             android:text="View Recipe" />
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
