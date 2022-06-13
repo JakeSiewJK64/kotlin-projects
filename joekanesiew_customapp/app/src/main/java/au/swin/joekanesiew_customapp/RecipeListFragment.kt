@@ -36,7 +36,7 @@ class RecipeListFragment : Fragment(R.layout.fragment_recipe_list) {
         super.onViewCreated(view, savedInstanceState)
         super.onCreate(savedInstanceState)
         recipeList = ArrayList()
-        recipeAdapter = RecipeAdapter(recipeList)
+        recipeAdapter = RecipeAdapter(recipeList, parentFragmentManager)
         recipeRecycler = view.findViewById(R.id.recipeRecycler)
         recipeRecycler.adapter = recipeAdapter
         recipeRecycler.layoutManager = LinearLayoutManager(view.context)

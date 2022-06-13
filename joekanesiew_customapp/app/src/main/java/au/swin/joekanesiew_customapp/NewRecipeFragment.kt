@@ -1,6 +1,7 @@
 package au.swin.joekanesiew_customapp
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import androidx.fragment.app.Fragment
@@ -37,6 +38,14 @@ class NewRecipeFragment : Fragment(R.layout.fragment_new_recipe) {
         recipeNameInput = view.findViewById(R.id.recipeNameInput)
         recipeDescInput = view.findViewById(R.id.recipeDescInput)
         recipeStepsInput = view.findViewById(R.id.recipeStepsInput)
+
+        val a = arguments?.getParcelable<Recipe>("RECIPE_DATA")
+        if (a != null) {
+            Log.i("RECIPE_DATA", a.toString())
+            recipeNameInput.editText?.setText(a.RecipeName)
+            recipeDescInput.editText?.setText(a.RecipeDescription)
+            recipeStepsInput.editText?.setText(a.RecipeSteps)
+        }
 
         submitButton.setOnClickListener {
             insertData(
