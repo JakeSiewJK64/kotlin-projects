@@ -9,6 +9,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="view">VIEW</string>
 
+    <string name="tako_recipe">Welcome to Tako Recipe!</string>
+    <string name="tako_getstarted">To get started, select the following.</string>
+
     <string name="sampleLatteName">Latte</string>
     <string name="sampleLatteDesc">Latte Desc</string>
     <string name="sampleLatteSteps">Latte Steps</string>
@@ -49,4 +52,10 @@
     <string name="menu_eventlog">View Event Logs</string>
     <string name="menu_recipe_editor">Add Recipe</string>
     <string name="menu_recipe_list">View Recipe</string>
+
+    <!-- Get Started Buttons -->
+    <string name="getstarted_viewrecipe">View Recipes</string>
+    <string name="getstarted_editrecipe">New Recipe</string>
+    <string name="getstarted_viewevents">View Events</string>
+    <string name="gettingstarted">Getting Started</string>
 </resources>

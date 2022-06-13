@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         supportFragmentManager.beginTransaction().apply {
-            replace(R.id.recipeFragmentFrame, NewRecipeFragment())
+            replace(R.id.recipeFragmentFrame, MainFragment())
             commit()
         }
 
@@ -98,6 +98,9 @@ class MainActivity : AppCompatActivity() {
                     )
                         .setAction(resources.getString(R.string.okDialog)) {}.show()
                     replaceFragment(EventLogFragment())
+                }
+                else -> {
+                    replaceFragment(MainFragment())
                 }
             }
             true
