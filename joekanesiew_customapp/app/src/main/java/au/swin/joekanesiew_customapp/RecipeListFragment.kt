@@ -25,9 +25,17 @@ class RecipeListFragment : Fragment(R.layout.fragment_recipe_list) {
 
             for (dc: DocumentChange in value?.documentChanges!!) {
                 if (dc.type == DocumentChange.Type.ADDED) {
-                    recipeList.add(dc.document.toObject(Recipe::class.java))
+                    recipeList.add(
+                        Recipe(
+                            dc.document.id,
+                            dc.document["recipeName"].toString(),
+                            dc.document["recipeDescription"].toString(),
+                            dc.document["recipeSteps"].toString(),
+                        )
+                    )
                 }
             }
+            Log.i("DATA", recipeList.toString())
             recipeAdapter.notifyDataSetChanged()
         }
     }

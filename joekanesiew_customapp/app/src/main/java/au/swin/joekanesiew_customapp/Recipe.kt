@@ -5,6 +5,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Recipe(
+    var ObjectId: String? = "",
     var RecipeName: String? = "",
     var RecipeDescription: String? = "",
     var RecipeSteps: String? = ""

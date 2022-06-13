@@ -13,4 +13,7 @@
     <string name="sampleLatteDesc">Latte Desc</string>
     <string name="sampleLatteSteps">Latte Steps</string>
 
+    <string name="editRecipe">Edit Recipe</string>
+    <string name="updateRecipe">Update Recipe</string>
+
 </resources>
