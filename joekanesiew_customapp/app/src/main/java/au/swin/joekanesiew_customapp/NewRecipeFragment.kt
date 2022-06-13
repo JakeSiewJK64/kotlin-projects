@@ -56,15 +56,15 @@ class NewRecipeFragment : Fragment(R.layout.fragment_new_recipe) {
 
         val a = arguments?.getParcelable<Recipe>("RECIPE_DATA")
 
-        recipeNameInput.editText?.setText(a?.RecipeName)
-        recipeDescInput.editText?.setText(a?.RecipeDescription)
-        recipeStepsInput.editText?.setText(a?.RecipeSteps)
-
         if (a != null) {
             Log.i("RECIPE_DATA", a.toString())
-
             title.text = resources.getString(R.string.editRecipe)
             submitButton.text = resources.getString(R.string.updateRecipe)
+            a.let {
+                recipeNameInput.editText?.setText(it.RecipeName)
+                recipeDescInput.editText?.setText(it.RecipeDescription)
+                recipeStepsInput.editText?.setText(it.RecipeSteps)
+            }
         }
 
         submitButton.setOnClickListener {
