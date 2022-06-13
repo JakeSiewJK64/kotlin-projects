@@ -93,6 +93,26 @@ class NewRecipeFragment : Fragment(R.layout.fragment_new_recipe) {
         builder.show()
     }
 
+    private fun validateInput(input: String, regexPattern: String): Boolean {
+        return input.matches(Regex(regexPattern))
+    }
+
+    private fun validateBlank(input: TextInputLayout): Boolean {
+        if (input.editText?.text?.length == 0) {
+            input.error = resources.getString(R.string.recipe_stringEmpty)
+            return false
+        }
+        return true
+    }
+
+    private fun displaySnackbar(message: String, view: View) {
+        Snackbar.make(
+            view,
+            message,
+            Snackbar.LENGTH_LONG
+        ).setAction("OK") {}.show()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -125,18 +145,32 @@ class NewRecipeFragment : Fragment(R.layout.fragment_new_recipe) {
 
         submitButton.setOnClickListener {
 
+            val validName = validateInput(recipeNameInput.editText?.text.toString(), "[A-Za-z]")
+
+            val notEmptyName = validateBlank(recipeNameInput)
+            val notEmptyDesc = validateBlank(recipeDescInput)
+            val notEmptySteps = validateBlank(recipeStepsInput)
+
+            if (!validName) {
+                recipeNameInput.editText?.error =
+                    resources.getString(R.string.recipe_alphabets_only)
+                displaySnackbar(resources.getString(R.string.recipe_alphabets_only), view)
+            }
+
             var docId: String? = null
             if (a != null) docId = a.ObjectId.toString()
 
-            upsertRecipe(
-                Recipe(
-                    docId,
-                    recipeNameInput.editText?.text.toString(),
-                    recipeDescInput.editText?.text.toString(),
-                    recipeStepsInput.editText?.text.toString()
-                ),
-                view
-            )
+            if (notEmptyName && notEmptyDesc && notEmptySteps && validName) {
+                upsertRecipe(
+                    Recipe(
+                        docId,
+                        recipeNameInput.editText?.text.toString(),
+                        recipeDescInput.editText?.text.toString(),
+                        recipeStepsInput.editText?.text.toString()
+                    ),
+                    view
+                )
+            }
         }
     }
 }

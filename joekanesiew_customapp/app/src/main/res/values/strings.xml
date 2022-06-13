@@ -31,4 +31,9 @@
     <string name="launchingRecipeEditor">Loading Add Recipe...</string>
     <string name="launchingRecipeList">Loading Recipe List</string>
 
+    <!--For Edit Text Layout Error Message-->
+    <string name="recipe_alphabets_only">Please enter only alphabetical characters!</string>
+    <string name="recipe_donotincludespecialcharacters">Please do not include special characters!</string>
+    <string name="recipe_stringEmpty">Please do not leave this field blank!</string>
+
 </resources>
