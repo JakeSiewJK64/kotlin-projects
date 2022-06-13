@@ -18,8 +18,15 @@ class RecipeViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         recipeName.text = recipe.RecipeName
         recipeDescription.text = recipe.RecipeDescription
         viewRecipeButton.setOnClickListener {
-            Snackbar.make(view, "${recipe.RecipeName} Clicked!", Snackbar.LENGTH_LONG)
-                .setAction("OK") {}.show()
+            Snackbar.make(
+                view,
+                String.format(
+                    view.resources.getString(R.string.viewholder_clicked),
+                    recipe.RecipeName
+                ),
+                Snackbar.LENGTH_LONG
+            )
+                .setAction(view.resources.getString(R.string.okDialog)) {}.show()
             val recipeFrag = NewRecipeFragment()
             val arg = Bundle()
             arg.putParcelable("RECIPE_DATA", recipe)

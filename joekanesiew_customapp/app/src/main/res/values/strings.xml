@@ -36,4 +36,7 @@
     <string name="recipe_donotincludespecialcharacters">Please do not include special characters!</string>
     <string name="recipe_stringEmpty">Please do not leave this field blank!</string>
 
+    <!--For ViewHolder Snackbar-->
+    <string name="viewholder_clicked">Loading %1$s...</string>
+
 </resources>
