@@ -39,4 +39,9 @@
     <!--For ViewHolder Snackbar-->
     <string name="viewholder_clicked">Loading %1$s...</string>
 
+    <!-- For Event Logs -->
+    <string name="eventlog_create">Created %1$s</string>
+    <string name="eventlog_update">Updated %1$s</string>
+    <string name="eventlog_delete">Deleted %1$s</string>
+
 </resources>

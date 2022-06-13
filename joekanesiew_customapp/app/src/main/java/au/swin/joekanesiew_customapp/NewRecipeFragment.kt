@@ -10,8 +10,12 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.firestore.FirebaseFirestore
+import java.text.SimpleDateFormat
+import java.util.*
 
 class NewRecipeFragment : Fragment(R.layout.fragment_new_recipe) {
+
+    private val DATEFORMAT = "YYYY-DD-MM HH:MM:SS"
 
     private lateinit var db: FirebaseFirestore
 
@@ -25,6 +29,7 @@ class NewRecipeFragment : Fragment(R.layout.fragment_new_recipe) {
     private fun upsertRecipe(recipe: Recipe, view: View) {
         db = FirebaseFirestore.getInstance()
         val dbCollection = db.collection("joekanesiew-recipe")
+        val eventLogCollection = db.collection("joekanesiew-eventlog")
 
         if (recipe.ObjectId != null) {
             dbCollection.document(recipe.ObjectId.toString()).set(recipe).addOnSuccessListener {
@@ -36,7 +41,21 @@ class NewRecipeFragment : Fragment(R.layout.fragment_new_recipe) {
                         recipe.RecipeName
                     ),
                     Snackbar.LENGTH_LONG
-                ).setAction("OK") {}.show()
+                ).setAction(resources.getString(R.string.okDialog)) {}.show()
+                eventLogCollection.document().set(
+                    EventLog(
+                        null,
+                        String.format(
+                            resources.getString(R.string.eventlog_update),
+                            recipe.RecipeName
+                        ),
+                        SimpleDateFormat(
+                            DATEFORMAT,
+                            Locale.getDefault()
+                        ).format(Calendar.getInstance().time),
+                        EventLogEnum.UPDATE
+                    )
+                )
             }
         } else {
             val docId = dbCollection.document().id
@@ -46,6 +65,20 @@ class NewRecipeFragment : Fragment(R.layout.fragment_new_recipe) {
                     resources.getString(R.string.recipeDeleteSuccess),
                     Snackbar.LENGTH_LONG
                 ).setAction(resources.getString(R.string.okDialog)) {}.show()
+                eventLogCollection.document().set(
+                    EventLog(
+                        null,
+                        String.format(
+                            resources.getString(R.string.eventlog_create),
+                            recipe.RecipeName
+                        ),
+                        SimpleDateFormat(
+                            DATEFORMAT,
+                            Locale.getDefault()
+                        ).format(Calendar.getInstance().time),
+                        EventLogEnum.CREATE
+                    )
+                )
             }
         }
     }
@@ -80,7 +113,9 @@ class NewRecipeFragment : Fragment(R.layout.fragment_new_recipe) {
 
         builder.setPositiveButton(resources.getString(R.string.okDialog)) { _, _ ->
             db = FirebaseFirestore.getInstance()
-            db.collection("joekanesiew-recipe").document(recipe.ObjectId.toString()).delete()
+            val recipeCollection = db.collection("joekanesiew-recipe")
+            val eventLogCollection = db.collection("joekanesiew-eventlog")
+            recipeCollection.document(recipe.ObjectId.toString()).delete()
                 .addOnSuccessListener {
                     Snackbar.make(
                         view.findViewById(R.id.recipeFragmentLayout),
@@ -88,6 +123,20 @@ class NewRecipeFragment : Fragment(R.layout.fragment_new_recipe) {
                         Snackbar.LENGTH_LONG
                     ).setAction("OK") {}.show()
                     deletedRecipeBuilder.show()
+                    eventLogCollection.document().set(
+                        EventLog(
+                            null,
+                            String.format(
+                                resources.getString(R.string.eventlog_delete),
+                                recipe.RecipeName
+                            ),
+                            SimpleDateFormat(
+                                DATEFORMAT,
+                                Locale.getDefault()
+                            ).format(Calendar.getInstance().time),
+                            EventLogEnum.DELETE
+                        )
+                    )
                 }
         }
         builder.show()
@@ -145,7 +194,7 @@ class NewRecipeFragment : Fragment(R.layout.fragment_new_recipe) {
 
         submitButton.setOnClickListener {
 
-            val validName = validateInput(recipeNameInput.editText?.text.toString(), "[A-Za-z]")
+            val validName = validateInput(recipeNameInput.editText?.text.toString(), "[A-Za-z ]+")
 
             val notEmptyName = validateBlank(recipeNameInput)
             val notEmptyDesc = validateBlank(recipeDescInput)
