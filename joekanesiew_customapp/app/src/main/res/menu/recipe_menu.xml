@@ -2,17 +2,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
-    <item android:title="My Recipe">
+    <item android:title="@string/menu_title">
         <menu>
             <item
                 android:id="@+id/newRecipe"
                 android:icon="@drawable/recipe"
-                android:title="Add Recipe" />
+                android:title="@string/menu_recipe_editor" />
 
             <item
                 android:id="@+id/viewRecipe"
                 android:icon="@drawable/search"
-                android:title="View Recipe" />
+                android:title="@string/menu_recipe_list" />
+
+            <item
+                android:id="@+id/viewEventLog"
+                android:icon="@drawable/log"
+                android:title="@string/menu_eventlog" />
         </menu>
     </item>
 </menu>

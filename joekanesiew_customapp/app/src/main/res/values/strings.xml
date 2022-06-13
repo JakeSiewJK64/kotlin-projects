@@ -7,7 +7,6 @@
     <string name="submit_recipe">Submit Recipe</string>
     <string name="delete_recipe">Delete Recipe</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="view">VIEW</string>
 
     <string name="sampleLatteName">Latte</string>
@@ -30,6 +29,7 @@
     <string name="recipeDeleteSuccess">Successfully added new recipe!</string>
     <string name="launchingRecipeEditor">Loading Add Recipe...</string>
     <string name="launchingRecipeList">Loading Recipe List</string>
+    <string name="launchingEventLogs">Loading Event Logs</string>
 
     <!--For Edit Text Layout Error Message-->
     <string name="recipe_alphabets_only">Please enter only alphabetical characters!</string>
@@ -44,4 +44,9 @@
     <string name="eventlog_update">Updated %1$s</string>
     <string name="eventlog_delete">Deleted %1$s</string>
 
+    <!-- For Menu -->
+    <string name="menu_title">My Recipe</string>
+    <string name="menu_eventlog">View Event Logs</string>
+    <string name="menu_recipe_editor">Add Recipe</string>
+    <string name="menu_recipe_list">View Recipe</string>
 </resources>

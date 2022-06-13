@@ -15,7 +15,7 @@ import java.util.*
 
 class NewRecipeFragment : Fragment(R.layout.fragment_new_recipe) {
 
-    private val DATEFORMAT = "YYYY-DD-MM HH:MM:SS"
+    private val DATEFORMAT = "yyyy-mm-dd HH:MM:SS"
 
     private lateinit var db: FirebaseFirestore
 

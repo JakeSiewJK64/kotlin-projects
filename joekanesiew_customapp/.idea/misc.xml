@@ -3,10 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/GitHub/JakeSiewJK64/kotlin-projects/joekanesiew_customapp/app/src/main/res/drawable/menu.xml" value="0.1915" />
+        <entry key="..\:/GitHub/JakeSiewJK64/kotlin-projects/joekanesiew_customapp/app/src/main/res/drawable/roundedstyle.xml" value="0.1915" />
         <entry key="..\:/GitHub/JakeSiewJK64/kotlin-projects/joekanesiew_customapp/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
         <entry key="..\:/GitHub/JakeSiewJK64/kotlin-projects/joekanesiew_customapp/app/src/main/res/layout/activity_recipe_list.xml" value="0.36666666666666664" />
         <entry key="..\:/GitHub/JakeSiewJK64/kotlin-projects/joekanesiew_customapp/app/src/main/res/layout/drawer_header.xml" value="0.35555555555555557" />
         <entry key="..\:/GitHub/JakeSiewJK64/kotlin-projects/joekanesiew_customapp/app/src/main/res/layout/drawer_nav.xml" value="0.2574074074074074" />
+        <entry key="..\:/GitHub/JakeSiewJK64/kotlin-projects/joekanesiew_customapp/app/src/main/res/layout/event_log_viewmodel.xml" value="0.33" />
+        <entry key="..\:/GitHub/JakeSiewJK64/kotlin-projects/joekanesiew_customapp/app/src/main/res/layout/fragment_event_log.xml" value="0.35462962962962963" />
         <entry key="..\:/GitHub/JakeSiewJK64/kotlin-projects/joekanesiew_customapp/app/src/main/res/layout/fragment_new_recipe.xml" value="0.33" />
         <entry key="..\:/GitHub/JakeSiewJK64/kotlin-projects/joekanesiew_customapp/app/src/main/res/layout/fragment_recipe_list.xml" value="0.35555555555555557" />
         <entry key="..\:/GitHub/JakeSiewJK64/kotlin-projects/joekanesiew_customapp/app/src/main/res/layout/recipeviewmodel.xml" value="0.33" />

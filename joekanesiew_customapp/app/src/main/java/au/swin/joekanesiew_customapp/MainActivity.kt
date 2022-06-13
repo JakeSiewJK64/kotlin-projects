@@ -90,6 +90,15 @@ class MainActivity : AppCompatActivity() {
                         .setAction(resources.getString(R.string.okDialog)) {}.show()
                     replaceFragment(RecipeListFragment())
                 }
+                R.id.viewEventLog -> {
+                    Snackbar.make(
+                        findViewById(android.R.id.content),
+                        resources.getString(R.string.launchingEventLogs),
+                        Snackbar.LENGTH_LONG
+                    )
+                        .setAction(resources.getString(R.string.okDialog)) {}.show()
+                    replaceFragment(EventLogFragment())
+                }
             }
             true
         }
