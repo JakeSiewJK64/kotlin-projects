@@ -11,7 +11,7 @@
 
             <item
                 android:id="@+id/viewRecipe"
-                android:icon="@drawable/recipe"
+                android:icon="@drawable/search"
                 android:title="View Recipe" />
         </menu>
     </item>

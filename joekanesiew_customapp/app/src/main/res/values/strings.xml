@@ -7,4 +7,10 @@
     <string name="submit_recipe">Submit Recipe</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="view">VIEW</string>
+
+    <string name="sampleLatteName">Latte</string>
+    <string name="sampleLatteDesc">Latte Desc</string>
+    <string name="sampleLatteSteps">Latte Steps</string>
+
 </resources>
