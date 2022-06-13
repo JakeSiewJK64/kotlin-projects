@@ -6,11 +6,13 @@ import android.util.Log
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.top_app_bar.*
+import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
 
@@ -34,6 +36,14 @@ class MainActivity : AppCompatActivity() {
             }
             Log.i("DATA", recipeList.toString())
         }
+    }
+
+    private fun replaceFragment(myCustomView: Fragment) {
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.recipeFragmentFrame, myCustomView)
+            commit()
+        }
+        drawerLayout.close()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,13 +71,27 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         actionBarToggle.syncState()
         navView.setNavigationItemSelectedListener {
-            if (it.itemId == R.id.newRecipe) {
-                Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "Launching Add Recipe",
-                    Snackbar.LENGTH_LONG
-                )
-                    .setAction("OK") {}.show()
+
+            when (it.itemId) {
+                R.id.newRecipe -> {
+                    Snackbar.make(
+                        findViewById(android.R.id.content),
+                        "Launching Add Recipe",
+                        Snackbar.LENGTH_LONG
+                    )
+                        .setAction("OK") {}.show()
+                    replaceFragment(NewRecipeFragment())
+                }
+                R.id.viewRecipe -> {
+                    Snackbar.make(
+                        findViewById(android.R.id.content),
+                        "Launching View Recipe",
+                        Snackbar.LENGTH_LONG
+                    )
+                        .setAction("OK") {}.show()
+                    replaceFragment(RecipeListFragment())
+                }
+
             }
             true
         }

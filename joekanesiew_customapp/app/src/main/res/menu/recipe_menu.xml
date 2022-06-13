@@ -8,6 +8,11 @@
                 android:id="@+id/newRecipe"
                 android:icon="@drawable/recipe"
                 android:title="Add Recipe" />
+
+            <item
+                android:id="@+id/viewRecipe"
+                android:icon="@drawable/recipe"
+                android:title="View Recipe" />
         </menu>
     </item>
 </menu>
