@@ -5,6 +5,7 @@
     <string name="recipe_steps">Recipe Steps</string>
     <string name="add_new_recipe">Add New Recipe</string>
     <string name="submit_recipe">Submit Recipe</string>
+    <string name="delete_recipe">Delete Recipe</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="view">VIEW</string>
@@ -15,5 +16,19 @@
 
     <string name="editRecipe">Edit Recipe</string>
     <string name="updateRecipe">Update Recipe</string>
+
+    <string name="recipeDeleted">This recipe has been deleted.</string>
+    <string name="returningRecipeList">%1$s has been deleted. Returning to Recipe List.</string>
+    <string name="okDialog">OK</string>
+
+    <string name="deleteRecipeConfirmationTitle">Delete this recipe?</string>
+    <string name="deleteRecipeConfirmationMessage">Are you sure you want to delete recipe for %1$s?</string>
+
+    <!--For Snackbars-->
+    <string name="recipeUpdateSuccess">Successfully updated recipe for %1$s.</string>
+    <string name="recipeDeletedSnackbar">Successfully deleted this recipe!</string>
+    <string name="recipeDeleteSuccess">Successfully added new recipe!</string>
+    <string name="launchingRecipeEditor">Loading Add Recipe...</string>
+    <string name="launchingRecipeList">Loading Recipe List</string>
 
 </resources>

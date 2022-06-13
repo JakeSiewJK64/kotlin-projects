@@ -71,12 +71,11 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         actionBarToggle.syncState()
         navView.setNavigationItemSelectedListener {
-
             when (it.itemId) {
                 R.id.newRecipe -> {
                     Snackbar.make(
                         findViewById(android.R.id.content),
-                        "Launching Add Recipe",
+                        resources.getString(R.string.launchingRecipeEditor),
                         Snackbar.LENGTH_LONG
                     )
                         .setAction("OK") {}.show()
@@ -85,13 +84,12 @@ class MainActivity : AppCompatActivity() {
                 R.id.viewRecipe -> {
                     Snackbar.make(
                         findViewById(android.R.id.content),
-                        "Launching View Recipe",
+                        resources.getString(R.string.launchingRecipeList),
                         Snackbar.LENGTH_LONG
                     )
-                        .setAction("OK") {}.show()
+                        .setAction(resources.getString(R.string.okDialog)) {}.show()
                     replaceFragment(RecipeListFragment())
                 }
-
             }
             true
         }
