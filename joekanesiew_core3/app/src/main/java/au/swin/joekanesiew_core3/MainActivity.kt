@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
         val medalistAdapter = MedalistAdapter(myMedalistList, supportFragmentManager)
         val mMedalistRecyclerView: RecyclerView = findViewById(R.id.mRecyclerView)
 
+        // todo: read and append medallist data to array list from csv file
         resources.openRawResource(R.raw.medallists).bufferedReader().forEachLine {
             val temp = it.split(",")
             if (temp[3].isDigitsOnly()) {
@@ -47,6 +48,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        // todo: sort medallist and mark top 10 medallists
         myMedalistList.sortByDescending { i -> i.totalMedals }
         myMedalistList.forEachIndexed { index, medalist ->
             if (index < 10) {
@@ -54,6 +56,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        // todo: configure recyclerview
         mMedalistRecyclerView.adapter = medalistAdapter
         mMedalistRecyclerView.layoutManager = LinearLayoutManager(this)
     }

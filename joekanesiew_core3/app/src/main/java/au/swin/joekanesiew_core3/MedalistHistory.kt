@@ -8,6 +8,7 @@ class MedalistHistory : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_medalist_history)
+        // todo: retrieve data from shared preferences and display to textview
         val sharedPref = getSharedPreferences("LastClickedMedalist", MODE_PRIVATE)
         val medalistTextView: TextView = findViewById(R.id.medalistDetailsName)
         val mString = String.format(

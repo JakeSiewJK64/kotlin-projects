@@ -20,6 +20,7 @@ class MedalistViewHolder(private val view: View) : RecyclerView.ViewHolder(view)
         medalName.text = medalist.medalistName
         medalNum.text = medalist.totalMedals.toString()
 
+        // todo: check if medalist is top 10. if true, display star icon
         if(medalist.isTop10) {
             medalIcon.setImageResource(R.drawable.star)
         } else {
