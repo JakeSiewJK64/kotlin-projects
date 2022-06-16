@@ -3,6 +3,7 @@ package au.swin.joekanesiew_core3
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
+import android.widget.ImageView
 import android.content.Context.MODE_PRIVATE
 import android.os.Bundle
 import android.view.ViewGroup
@@ -28,7 +29,7 @@ class MedalistAdapter(
 
     inner class MedalistViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
-        private val medalIcon: _root_ide_package_.android.widget.ImageView = view.findViewById(R.id.medalIcon)
+        private val medalIcon: ImageView = view.findViewById(R.id.medalIcon)
         private val medalName: TextView = view.findViewById(R.id.medalistNameText)
         private val medalNum: TextView = view.findViewById(R.id.medalNumberText)
         private val sharedPref = view.context.getSharedPreferences("LastClickedMedalist", MODE_PRIVATE)
