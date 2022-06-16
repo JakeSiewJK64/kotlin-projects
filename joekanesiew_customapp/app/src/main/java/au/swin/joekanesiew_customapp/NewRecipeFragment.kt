@@ -11,6 +11,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
@@ -39,6 +40,8 @@ class NewRecipeFragment : Fragment(R.layout.fragment_new_recipe) {
     private lateinit var recipeNameInput: TextInputLayout
     private lateinit var recipeDescInput: TextInputLayout
     private lateinit var recipeStepsInput: TextInputLayout
+    private lateinit var recipeDurationInput: TextInputLayout
+    private lateinit var recipeFavoriteCheckbox: CheckBox
     private lateinit var recipeImageUpload: ImageView
     private lateinit var title: TextView
 
@@ -64,7 +67,6 @@ class NewRecipeFragment : Fragment(R.layout.fragment_new_recipe) {
                     ),
                     Snackbar.LENGTH_LONG
                 ).setAction(resources.getString(R.string.okDialog)) {}.show()
-
                 // todo: append to event log
                 eventLogCollection.document().set(
                     EventLog(
@@ -207,7 +209,10 @@ class NewRecipeFragment : Fragment(R.layout.fragment_new_recipe) {
         recipeStepsInput = view.findViewById(R.id.recipeStepsInput)
         title = view.findViewById(R.id.tvRecipeEditorTitle)
         recipeImageUpload = view.findViewById(R.id.recipeImageUpload)
+        recipeDurationInput = view.findViewById(R.id.recipePrepTime)
+        recipeFavoriteCheckbox = view.findViewById(R.id.recipeFavorite)
 
+        // todo: on image selected replace image view resource
         val resultLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == Activity.RESULT_OK) {
@@ -228,6 +233,7 @@ class NewRecipeFragment : Fragment(R.layout.fragment_new_recipe) {
                 }
             }
 
+        // todo: on image view tapped, initiate image browser from file application.
         recipeImageUpload.setOnClickListener {
             val i = Intent()
             i.type = "image/*"
@@ -237,6 +243,7 @@ class NewRecipeFragment : Fragment(R.layout.fragment_new_recipe) {
 
         val a = arguments?.getParcelable<Recipe>("RECIPE_DATA")
 
+        // todo: check if recipe is existing. if true, populate view with recipe data.
         if (a != null) {
             storage = Firebase.storage("gs://jakesiewjk64-customapp.appspot.com")
             val storageRef = storage.reference
@@ -252,6 +259,8 @@ class NewRecipeFragment : Fragment(R.layout.fragment_new_recipe) {
                 recipeNameInput.editText?.setText(it.RecipeName)
                 recipeDescInput.editText?.setText(it.RecipeDescription)
                 recipeStepsInput.editText?.setText(it.RecipeSteps)
+                recipeDurationInput.editText?.setText(it.PreparationTime.toString())
+                recipeFavoriteCheckbox.isChecked = it.Favorites.toString().toBoolean()
             }
             deleteButton.isEnabled = true
             deleteButton.setTextColor(resources.getColor(R.color.red, null))
@@ -269,6 +278,7 @@ class NewRecipeFragment : Fragment(R.layout.fragment_new_recipe) {
             val notEmptyName = validateBlank(recipeNameInput)
             val notEmptyDesc = validateBlank(recipeDescInput)
             val notEmptySteps = validateBlank(recipeStepsInput)
+            val notEmptyDuration = validateBlank(recipeDurationInput)
 
             if (!validName) {
                 recipeNameInput.editText?.error =
@@ -279,14 +289,16 @@ class NewRecipeFragment : Fragment(R.layout.fragment_new_recipe) {
             var docId: String? = null
             if (a != null) docId = a.ObjectId.toString()
 
-            if (notEmptyName && notEmptyDesc && notEmptySteps && validName) {
+            if (notEmptyName && notEmptyDesc && notEmptySteps && validName && notEmptyDuration) {
                 upsertRecipe(
                     Recipe(
                         docId,
                         recipeNameInput.editText?.text.toString(),
                         recipeDescInput.editText?.text.toString(),
                         recipeStepsInput.editText?.text.toString(),
-                        fileName
+                        fileName,
+                        recipeFavoriteCheckbox.isChecked,
+                        recipeDurationInput.editText?.text.toString().toInt()
                     ),
                     view
                 )

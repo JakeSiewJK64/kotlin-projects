@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">joekanesiew_customapp</string>
     <string name="recipe_name">Recipe Name</string>
+    <string name="recipe_prepTime">Preparation Time</string>
     <string name="recipe_description">Recipe Description</string>
     <string name="recipe_steps">Recipe Steps</string>
     <string name="add_new_recipe">Add New Recipe</string>
@@ -58,4 +59,5 @@
     <string name="getstarted_editrecipe">New Recipe</string>
     <string name="getstarted_viewevents">View Events</string>
     <string name="gettingstarted">Getting Started</string>
+    <string name="recipe_favorite">Favorite</string>
 </resources>

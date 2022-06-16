@@ -32,6 +32,8 @@ class RecipeListFragment : Fragment(R.layout.fragment_recipe_list) {
                             dc.document["recipeDescription"].toString(),
                             dc.document["recipeSteps"].toString(),
                             dc.document["recipeImages"].toString(),
+                            dc.document["favorites"]?.toString().toBoolean(),
+                            dc.document["preparationTime"].toString().toInt(),
                         )
                     )
                 }
