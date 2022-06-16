@@ -21,7 +21,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
-import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.io.InputStream
 import java.text.SimpleDateFormat
@@ -54,19 +53,6 @@ class NewRecipeFragment : Fragment(R.layout.fragment_new_recipe) {
         val eventLogCollection = db.collection("joekanesiew-eventlog")
 
         if (recipe.ObjectId != null) {
-
-            // todo: append to firebase storage
-            val bitmap = (recipeImageUpload.drawable as BitmapDrawable).bitmap
-            val baos = ByteArrayOutputStream()
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-            val data = baos.toByteArray()
-
-            val uploadTask = recipeImageRef.putBytes(data)
-            uploadTask.addOnSuccessListener { taskSnapshot ->
-                Snackbar.make(view, "Done Upload!$taskSnapshot", Snackbar.LENGTH_LONG)
-                    .setAction("OK") {}.show()
-            }
-
             // todo: append to recipe database
             dbCollection.document(recipe.ObjectId.toString()).set(recipe).addOnSuccessListener {
                 Log.i("DATA", "[SUCCESS] $recipe")
@@ -118,6 +104,17 @@ class NewRecipeFragment : Fragment(R.layout.fragment_new_recipe) {
                     )
                 )
             }
+        }
+        // todo: append to firebase storage
+        val bitmap = (recipeImageUpload.drawable as BitmapDrawable).bitmap
+        val baos = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+        val data = baos.toByteArray()
+
+        val uploadTask = recipeImageRef.putBytes(data)
+        uploadTask.addOnSuccessListener { taskSnapshot ->
+            Snackbar.make(view, "Done Upload!$taskSnapshot", Snackbar.LENGTH_LONG)
+                .setAction("OK") {}.show()
         }
     }
 
