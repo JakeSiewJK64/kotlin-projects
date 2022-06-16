@@ -31,6 +31,7 @@ class RecipeListFragment : Fragment(R.layout.fragment_recipe_list) {
                             dc.document["recipeName"].toString(),
                             dc.document["recipeDescription"].toString(),
                             dc.document["recipeSteps"].toString(),
+                            dc.document["recipeImages"].toString(),
                         )
                     )
                 }

@@ -5,6 +5,7 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -17,6 +18,11 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.ktx.storage
+import java.io.ByteArrayInputStream
+import java.io.ByteArrayOutputStream
 import java.io.InputStream
 import java.text.SimpleDateFormat
 import java.util.*
@@ -24,8 +30,10 @@ import java.util.*
 class NewRecipeFragment : Fragment(R.layout.fragment_new_recipe) {
 
     private val DATEFORMAT = "yyyy-mm-dd HH:MM:SS"
+    private var fileName = ""
 
     private lateinit var db: FirebaseFirestore
+    private lateinit var storage: FirebaseStorage
 
     private lateinit var submitButton: Button
     private lateinit var deleteButton: Button
@@ -37,12 +45,31 @@ class NewRecipeFragment : Fragment(R.layout.fragment_new_recipe) {
 
     private fun upsertRecipe(recipe: Recipe, view: View) {
         db = FirebaseFirestore.getInstance()
+        storage = Firebase.storage("gs://jakesiewjk64-customapp.appspot.com")
+
+        val storageRef = storage.reference
+        val recipeImageRef = storageRef.child("images/$fileName.jpg")
+
         val dbCollection = db.collection("joekanesiew-recipe")
         val eventLogCollection = db.collection("joekanesiew-eventlog")
 
         if (recipe.ObjectId != null) {
+
+            // todo: append to firebase storage
+            val bitmap = (recipeImageUpload.drawable as BitmapDrawable).bitmap
+            val baos = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+            val data = baos.toByteArray()
+
+            val uploadTask = recipeImageRef.putBytes(data)
+            uploadTask.addOnSuccessListener { taskSnapshot ->
+                Snackbar.make(view, "Done Upload!$taskSnapshot", Snackbar.LENGTH_LONG)
+                    .setAction("OK") {}.show()
+            }
+
+            // todo: append to recipe database
             dbCollection.document(recipe.ObjectId.toString()).set(recipe).addOnSuccessListener {
-                Log.i("DATA", "[SUCCESS] ${recipe}")
+                Log.i("DATA", "[SUCCESS] $recipe")
                 Snackbar.make(
                     view.findViewById(R.id.recipeFragmentLayout),
                     String.format(
@@ -51,6 +78,8 @@ class NewRecipeFragment : Fragment(R.layout.fragment_new_recipe) {
                     ),
                     Snackbar.LENGTH_LONG
                 ).setAction(resources.getString(R.string.okDialog)) {}.show()
+
+                // todo: append to event log
                 eventLogCollection.document().set(
                     EventLog(
                         null,
@@ -189,10 +218,11 @@ class NewRecipeFragment : Fragment(R.layout.fragment_new_recipe) {
                     if (data != null) {
                         val uri: Uri? = data.data
                         val inputStream: InputStream? =
-                            view.context.contentResolver.openInputStream(
-                                uri!!
-                            )
+                            view.context.contentResolver.openInputStream(uri!!)
                         val bMap: Bitmap = BitmapFactory.decodeStream(inputStream)
+
+                        fileName = uri.path.toString()
+
                         recipeImageUpload.setImageBitmap(bMap)
 
                         Log.i("DATA", "[INTENT DATA]: $data")
@@ -211,6 +241,13 @@ class NewRecipeFragment : Fragment(R.layout.fragment_new_recipe) {
         val a = arguments?.getParcelable<Recipe>("RECIPE_DATA")
 
         if (a != null) {
+            storage = Firebase.storage("gs://jakesiewjk64-customapp.appspot.com")
+            val storageRef = storage.reference
+            storageRef.child("images/${a.RecipeImages}.jpg").getBytes(Long.MAX_VALUE)
+                .addOnSuccessListener {
+                    recipeImageUpload.setImageBitmap(BitmapFactory.decodeByteArray(it, 0, it.size))
+                }
+
             Log.i("RECIPE_DATA", a.toString())
             title.text = resources.getString(R.string.editRecipe)
             submitButton.text = resources.getString(R.string.updateRecipe)
@@ -251,7 +288,8 @@ class NewRecipeFragment : Fragment(R.layout.fragment_new_recipe) {
                         docId,
                         recipeNameInput.editText?.text.toString(),
                         recipeDescInput.editText?.text.toString(),
-                        recipeStepsInput.editText?.text.toString()
+                        recipeStepsInput.editText?.text.toString(),
+                        fileName
                     ),
                     view
                 )

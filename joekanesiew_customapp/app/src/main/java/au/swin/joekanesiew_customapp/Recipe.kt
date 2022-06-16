@@ -8,5 +8,6 @@ data class Recipe(
     var ObjectId: String? = "",
     var RecipeName: String? = "",
     var RecipeDescription: String? = "",
-    var RecipeSteps: String? = ""
+    var RecipeSteps: String? = "",
+    var RecipeImages: String? = ""
 ): Parcelable
