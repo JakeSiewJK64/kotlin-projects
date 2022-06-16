@@ -2,7 +2,8 @@
     <img src="https://avatars.githubusercontent.com/u/47139291?s=120&v=4" alt="Logo" width=72 height=72>
   <h3 align="center">COS30017 Custom App</h3>
   <p align="center">
-    Custom Application for HD Level 2 - Tako Recipe App
+    <p align="center">Custom Application for HD Level 2 - Tako Recipe App</p>
+    <p align="center">Developed by: Siew Joe Kane</p>
     <br>
     <a href="https://github.com/JakeSiewJK64/kotlin-projects/issues/new?template=bug.md">Report bug</a>
     ·
