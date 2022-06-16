@@ -47,7 +47,7 @@ This repo is not open for contributions.
 
 ## Copyright and license
 
-Code and documentation copyright 2011-2018 the authors. Code released under the [MIT License](https://reponame/blob/master/LICENSE).
+Code and documentation copyright 2022 the authors. Code released under the [MIT License](https://reponame/blob/master/LICENSE).
 
 ## DISCLAIMER
 As this repo is open for public viewing, please bear in mind that Plagarism is a serious offence and any outcome is under SUT's discretion. Reference this repo at your own risk. 
