@@ -1,15 +1,23 @@
 package au.swin.joekanesiew_customapp
 
+import android.app.Activity
 import android.app.AlertDialog
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.firestore.FirebaseFirestore
+import java.io.InputStream
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -24,6 +32,7 @@ class NewRecipeFragment : Fragment(R.layout.fragment_new_recipe) {
     private lateinit var recipeNameInput: TextInputLayout
     private lateinit var recipeDescInput: TextInputLayout
     private lateinit var recipeStepsInput: TextInputLayout
+    private lateinit var recipeImageUpload: ImageView
     private lateinit var title: TextView
 
     private fun upsertRecipe(recipe: Recipe, view: View) {
@@ -171,6 +180,33 @@ class NewRecipeFragment : Fragment(R.layout.fragment_new_recipe) {
         recipeDescInput = view.findViewById(R.id.recipeDescInput)
         recipeStepsInput = view.findViewById(R.id.recipeStepsInput)
         title = view.findViewById(R.id.tvRecipeEditorTitle)
+        recipeImageUpload = view.findViewById(R.id.recipeImageUpload)
+
+        val resultLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == Activity.RESULT_OK) {
+                    val data: Intent? = result.data
+                    if (data != null) {
+                        val uri: Uri? = data.data
+                        val inputStream: InputStream? =
+                            view.context.contentResolver.openInputStream(
+                                uri!!
+                            )
+                        val bMap: Bitmap = BitmapFactory.decodeStream(inputStream)
+                        recipeImageUpload.setImageBitmap(bMap)
+
+                        Log.i("DATA", "[INTENT DATA]: $data")
+                        Log.i("DATA", "[bMap]: $bMap")
+                    }
+                }
+            }
+
+        recipeImageUpload.setOnClickListener {
+            val i = Intent()
+            i.type = "image/*"
+            i.action = Intent.ACTION_GET_CONTENT
+            resultLauncher.launch(i)
+        }
 
         val a = arguments?.getParcelable<Recipe>("RECIPE_DATA")
 
