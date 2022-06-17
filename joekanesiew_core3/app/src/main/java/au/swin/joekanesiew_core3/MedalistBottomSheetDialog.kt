@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class MedalistBottomSheetDialog : BottomSheetDialogFragment() {
+class CustomBottomSheet : BottomSheetDialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -19,7 +19,7 @@ class MedalistBottomSheetDialog : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val medalist: Medalist? = arguments?.getParcelable("MEDALIST_DATA")
+        val medalist: Medalist? = arguments?.getParcelable("[DATA]:MEDALIST")
         Log.i("DATA", medalist.toString())
         medalist?.let {
             view.findViewById<TextView>(R.id.modalCountryName).text = it.medalistName

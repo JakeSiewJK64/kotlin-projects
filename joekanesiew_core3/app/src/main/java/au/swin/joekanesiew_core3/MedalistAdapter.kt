@@ -11,7 +11,8 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 
 class MedalistAdapter(
-    private val medalList: ArrayList<Medalist>, private val supportFragmentManager: FragmentManager
+    private val supportFragmentManager: FragmentManager,
+    private val medalList: ArrayList<Medalist>
 ) : RecyclerView.Adapter<MedalistAdapter.MedalistViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MedalistViewHolder {
         val layoutInflater: LayoutInflater = LayoutInflater.from(parent.context)
@@ -27,37 +28,45 @@ class MedalistAdapter(
         return medalList.size
     }
 
+    // inner class to contain view holder
     inner class MedalistViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
-        private val medalIcon: ImageView = view.findViewById(R.id.medalIcon)
-        private val medalName: TextView = view.findViewById(R.id.medalistNameText)
-        private val medalNum: TextView = view.findViewById(R.id.medalNumberText)
-        private val sharedPref = view.context.getSharedPreferences("LastClickedMedalist", MODE_PRIVATE)
+        private val sharedPref =
+            view.context.getSharedPreferences("[DATA]:PREVIOUS_MEDALIST", MODE_PRIVATE)
         private val editSharedPref = sharedPref.edit()
+        private val medalNum: TextView = view.findViewById(R.id.medalNumberText)
+        private val medalName: TextView = view.findViewById(R.id.medalistNameText)
+        private val medalIcon: ImageView = view.findViewById(R.id.medalIcon)
 
+        // bind function to bind data to single view model
         fun bind(medalist: Medalist, supportFragmentManager: FragmentManager) {
-            medalName.text = medalist.medalistName
             medalNum.text = medalist.totalMedals.toString()
+            medalName.text = medalist.medalistName
 
-            // todo: check if medalist is top 10. if true, display star icon
-            if(medalist.isTop10) {
+            /**
+             * if medallist attribute isTop10 is true, set ImageView to star icon
+             * else set image resource to 0
+             **/
+            if (medalist.isTop10) {
                 medalIcon.setImageResource(R.drawable.star)
             } else {
                 medalIcon.setImageResource(0)
             }
 
             view.setOnClickListener {
-
-                // todo: get support fragment manager
-                val b = MedalistBottomSheetDialog()
+                val b = CustomBottomSheet()
                 val bundle = Bundle()
-                bundle.putParcelable("MEDALIST_DATA", medalist)
+                bundle.putParcelable("[DATA]:MEDALIST", medalist)
                 b.arguments = bundle
                 b.show(supportFragmentManager, "MEDALIST")
 
-                // todo: stores clicked country name into shared preferences
-                editSharedPref.putString("LAST_CLICKED_COUNTRY_NAME", medalist.medalistName)
+                /**
+                 * using shared preferences to store
+                 * 1. last clicked country
+                 * 2.last clicked country IOC
+                 **/
                 editSharedPref.putString("LAST_CLICKED_COUNTRY_IOC", medalist.IOC)
+                editSharedPref.putString("LAST_CLICKED_COUNTRY_NAME", medalist.medalistName)
                 editSharedPref.apply()
             }
         }
