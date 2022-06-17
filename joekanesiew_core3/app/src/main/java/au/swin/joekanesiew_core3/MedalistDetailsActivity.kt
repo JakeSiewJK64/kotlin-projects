@@ -14,8 +14,8 @@ class MedalistDetailsActivity : AppCompatActivity() {
         val medalistTextView: TextView = findViewById(R.id.medalistDetailsName)
         val mString = String.format(
             resources.getString(R.string.medalist_details_name),
-            sharedPref.getString("LAST_CLICKED_COUNTRY_NAME", null),
-            sharedPref.getString("LAST_CLICKED_COUNTRY_IOC", null),
+            sharedPref.getString("[DATA]:PREVIOUS_MEDALIST_NAME", null),
+            sharedPref.getString("[DATA]:PREVIOUS_MEDALIST_IOC", null),
         )
         medalistTextView.text = mString
     }

@@ -65,8 +65,8 @@ class MedalistAdapter(
                  * 1. last clicked country
                  * 2.last clicked country IOC
                  **/
-                editSharedPref.putString("LAST_CLICKED_COUNTRY_NAME", medalist.name)
-                editSharedPref.putString("LAST_CLICKED_COUNTRY_IOC", medalist.IOC)
+                editSharedPref.putString("[DATA]:PREVIOUS_MEDALIST_NAME", medalist.name)
+                editSharedPref.putString("[DATA]:PREVIOUS_MEDALIST_IOC", medalist.IOC)
                 editSharedPref.apply()
             }
         }
