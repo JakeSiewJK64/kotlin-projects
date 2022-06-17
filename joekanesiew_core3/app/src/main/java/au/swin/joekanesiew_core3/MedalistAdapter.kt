@@ -7,11 +7,12 @@ import android.widget.ImageView
 import android.content.Context.MODE_PRIVATE
 import android.os.Bundle
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 
 class MedalistAdapter(
-    private val supportFragmentManager: FragmentManager,
+    private val adapterSupportFragmentManager: FragmentManager,
     private val medalList: ArrayList<MedalistModel>
 ) : RecyclerView.Adapter<MedalistAdapter.MedalistViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MedalistViewHolder {
@@ -21,7 +22,7 @@ class MedalistAdapter(
     }
 
     override fun onBindViewHolder(holder: MedalistViewHolder, position: Int) {
-        holder.bind(medalList[position], supportFragmentManager)
+        holder.bind(medalList[position])
     }
 
     override fun getItemCount(): Int {
@@ -34,12 +35,13 @@ class MedalistAdapter(
         private val sharedPref =
             view.context.getSharedPreferences("[DATA]:PREVIOUS_MEDALIST", MODE_PRIVATE)
         private val editSharedPref = sharedPref.edit()
-        private val medalNum: TextView = view.findViewById(R.id.medalNumberText)
-        private val medalName: TextView = view.findViewById(R.id.medalistNameText)
-        private val medalIcon: ImageView = view.findViewById(R.id.medalIcon)
+        private val medalNum: TextView = view.findViewById(R.id.medalistViewModelNumber)
+        private val medalName: TextView = view.findViewById(R.id.medalistViewModelName)
+        private val medalIcon: ImageView = view.findViewById(R.id.medalistViewModelIcon)
+        private val medalLayout: LinearLayout = view.findViewById(R.id.medalistViewModelLayout)
 
         // bind function to bind data to single view model
-        fun bind(medalist: MedalistModel, supportFragmentManager: FragmentManager) {
+        fun bind(medalist: MedalistModel) {
             medalNum.text = medalist.totalMedals.toString()
             medalName.text = medalist.name
 
@@ -48,9 +50,21 @@ class MedalistAdapter(
              * else set image resource to 0
              **/
             if (medalist.top10) {
-                medalIcon.setImageResource(R.drawable.star)
+                medalIcon.setImageResource(R.drawable.crown)
+                medalLayout.setBackgroundColor(
+                    view.context.resources.getColor(
+                        R.color.yellow,
+                        null
+                    )
+                )
             } else {
                 medalIcon.setImageResource(0)
+                medalLayout.setBackgroundColor(
+                    view.context.resources.getColor(
+                        R.color.white,
+                        null
+                    )
+                )
             }
 
             view.setOnClickListener {
@@ -58,7 +72,7 @@ class MedalistAdapter(
                 val bundle = Bundle()
                 bundle.putParcelable("[DATA]:MEDALIST", medalist)
                 b.arguments = bundle
-                b.show(supportFragmentManager, "[TAG]:MEDALIST")
+                b.show(adapterSupportFragmentManager, "[TAG]:MEDALIST")
 
                 /**
                  * using shared preferences to store
