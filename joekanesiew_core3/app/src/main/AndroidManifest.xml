@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Joekanesiew_core3">
         <activity
-            android:name=".MedalistHistory"
+            android:name=".MedalistDetailsActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

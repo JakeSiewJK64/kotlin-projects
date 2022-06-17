@@ -20,17 +20,24 @@ class CustomBottomSheet : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val medalist: MedalistModel? = arguments?.getParcelable("[DATA]:MEDALIST")
+
+        val goldTV: TextView = view.findViewById(R.id.bottomSheetGold)
+        val silverTV: TextView = view.findViewById(R.id.bottomSheetSilver)
+        val bronzeTV: TextView = view.findViewById(R.id.bottomSheetBronze)
+        val cName: TextView = view.findViewById(R.id.bottomSheetCountryName)
+        val cIOC: TextView = view.findViewById(R.id.bottomSheetIOC)
+
         Log.i("DATA", medalist.toString())
         medalist?.apply {
             view.apply {
-                findViewById<TextView>(R.id.modalCountryName).text = name
-                findViewById<TextView>(R.id.modalCountryGold).text =
+                cName.text = name
+                goldTV.text =
                     String.format(resources.getString(R.string.gold_medals), medalist.gold)
-                findViewById<TextView>(R.id.modalCountrySilver).text =
+                silverTV.text =
                     String.format(resources.getString(R.string.silver_medals), medalist.silver)
-                findViewById<TextView>(R.id.modalCountryBronze).text =
+                bronzeTV.text =
                     String.format(resources.getString(R.string.bronze_medals), medalist.bronze)
-                findViewById<TextView>(R.id.modalIOC).text = IOC
+                cIOC.text = IOC
             }
         }
     }

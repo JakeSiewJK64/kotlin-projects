@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 
     // starts intent if the menu icon is pressed.
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val i = Intent(this, MedalistHistory::class.java)
+        val i = Intent(this, MedalistDetailsActivity::class.java)
         startActivity(i)
         return super.onOptionsItemSelected(item)
     }

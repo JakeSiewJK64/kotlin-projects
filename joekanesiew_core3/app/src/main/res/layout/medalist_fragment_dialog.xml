@@ -15,7 +15,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/modalCountryName"
+                android:id="@+id/bottomSheetCountryName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Australia"
@@ -23,7 +23,7 @@
                 android:textSize="24sp" />
 
             <TextView
-                android:id="@+id/modalCountryGold"
+                android:id="@+id/bottomSheetGold"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="147 gold medals"
@@ -31,7 +31,7 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/modalCountrySilver"
+                android:id="@+id/bottomSheetSilver"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="10 silver medals"
@@ -39,7 +39,7 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/modalCountryBronze"
+                android:id="@+id/bottomSheetBronze"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="10 bronze medals"
@@ -53,7 +53,7 @@
             android:layout_weight="2">
 
             <TextView
-                android:id="@+id/modalIOC"
+                android:id="@+id/bottomSheetIOC"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="AUS"
