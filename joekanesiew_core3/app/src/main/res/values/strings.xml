@@ -4,4 +4,7 @@
     <string name="gold_medals">%1$d gold medals</string>
     <string name="silver_medals">%1$d silver medals</string>
     <string name="bronze_medals">%1$d bronze medals</string>
+
+    <string name="previous_country">Previous Country</string>
+
 </resources>

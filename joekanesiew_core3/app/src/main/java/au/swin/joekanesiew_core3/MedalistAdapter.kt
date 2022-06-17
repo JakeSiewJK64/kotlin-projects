@@ -33,7 +33,7 @@ class MedalistAdapter(
     inner class MedalistViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
         private val sharedPref =
-            view.context.getSharedPreferences("[DATA]:PREVIOUS_MEDALIST", MODE_PRIVATE)
+            view.context.getSharedPreferences(MedalistContants.MEDALLISTS_SHARE_PREFS, MODE_PRIVATE)
         private val editSharedPref = sharedPref.edit()
         private val medalNum: TextView = view.findViewById(R.id.medalistViewModelNumber)
         private val medalName: TextView = view.findViewById(R.id.medalistViewModelName)
