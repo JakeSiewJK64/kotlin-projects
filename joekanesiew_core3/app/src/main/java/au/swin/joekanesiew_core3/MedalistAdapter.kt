@@ -12,11 +12,11 @@ import androidx.recyclerview.widget.RecyclerView
 
 class MedalistAdapter(
     private val supportFragmentManager: FragmentManager,
-    private val medalList: ArrayList<Medalist>
+    private val medalList: ArrayList<MedalistModel>
 ) : RecyclerView.Adapter<MedalistAdapter.MedalistViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MedalistViewHolder {
         val layoutInflater: LayoutInflater = LayoutInflater.from(parent.context)
-        val view = layoutInflater.inflate(R.layout.medalistviewmodel, parent, false) as View
+        val view = layoutInflater.inflate(R.layout.medalist_view_model, parent, false) as View
         return MedalistViewHolder(view)
     }
 
@@ -39,15 +39,15 @@ class MedalistAdapter(
         private val medalIcon: ImageView = view.findViewById(R.id.medalIcon)
 
         // bind function to bind data to single view model
-        fun bind(medalist: Medalist, supportFragmentManager: FragmentManager) {
+        fun bind(medalist: MedalistModel, supportFragmentManager: FragmentManager) {
             medalNum.text = medalist.totalMedals.toString()
-            medalName.text = medalist.medalistName
+            medalName.text = medalist.name
 
             /**
              * if medallist attribute isTop10 is true, set ImageView to star icon
              * else set image resource to 0
              **/
-            if (medalist.isTop10) {
+            if (medalist.top10) {
                 medalIcon.setImageResource(R.drawable.star)
             } else {
                 medalIcon.setImageResource(0)
@@ -58,15 +58,15 @@ class MedalistAdapter(
                 val bundle = Bundle()
                 bundle.putParcelable("[DATA]:MEDALIST", medalist)
                 b.arguments = bundle
-                b.show(supportFragmentManager, "MEDALIST")
+                b.show(supportFragmentManager, "[TAG]:MEDALIST")
 
                 /**
                  * using shared preferences to store
                  * 1. last clicked country
                  * 2.last clicked country IOC
                  **/
+                editSharedPref.putString("LAST_CLICKED_COUNTRY_NAME", medalist.name)
                 editSharedPref.putString("LAST_CLICKED_COUNTRY_IOC", medalist.IOC)
-                editSharedPref.putString("LAST_CLICKED_COUNTRY_NAME", medalist.medalistName)
                 editSharedPref.apply()
             }
         }

@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val mMedalistRecyclerView: RecyclerView = findViewById(R.id.mRecyclerView)
-        val medallistList = ArrayList<Medalist>()
+        val medallistList = ArrayList<MedalistModel>()
         val medalistAdapter = MedalistAdapter(supportFragmentManager, medallistList)
 
         /**
@@ -45,12 +45,12 @@ class MainActivity : AppCompatActivity() {
             .forEach {
                 val temp = it.split(",")
                 medallistList.add(
-                    Medalist(
-                        temp[0],
-                        temp[3].toInt(),
-                        temp[4].toInt(),
-                        temp[5].toInt(),
-                        temp[1]
+                    MedalistModel(
+                        name = temp[0],
+                        IOC = temp[1],
+                        gold = temp[3].toInt(),
+                        silver = temp[4].toInt(),
+                        bronze = temp[5].toInt(),
                     )
                 )
             }
@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
             sortByDescending { i -> i.totalMedals }
             forEachIndexed { index, a ->
                 if (index < 10) {
-                    a.isTop10 = true
+                    a.top10 = true
                 }
             }
         }
