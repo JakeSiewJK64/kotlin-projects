@@ -32,9 +32,9 @@ class MedalistAdapter(
     // inner class to contain view holder
     inner class MedalistViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
-        private val sharedPref =
+        private val medalistSharePrefs =
             view.context.getSharedPreferences(MedalistContants.MEDALLISTS_SHARE_PREFS, MODE_PRIVATE)
-        private val editSharedPref = sharedPref.edit()
+        private val editSharedPrefs = medalistSharePrefs.edit()
         private val medalNum: TextView = view.findViewById(R.id.medalistViewModelNumber)
         private val medalName: TextView = view.findViewById(R.id.medalistViewModelName)
         private val medalIcon: ImageView = view.findViewById(R.id.medalistViewModelIcon)
@@ -77,11 +77,13 @@ class MedalistAdapter(
                 /**
                  * using shared preferences to store
                  * 1. last clicked country
-                 * 2.last clicked country IOC
+                 * 2. last clicked country IOC
                  **/
-                editSharedPref.putString("[DATA]:PREVIOUS_MEDALIST_NAME", medalist.name)
-                editSharedPref.putString("[DATA]:PREVIOUS_MEDALIST_IOC", medalist.IOC)
-                editSharedPref.apply()
+                editSharedPrefs.apply {
+                    putString("[DATA]:PREVIOUS_MEDALIST_NAME", medalist.name)
+                    putString("[DATA]:PREVIOUS_MEDALIST_IOC", medalist.IOC)
+                    apply()
+                }
             }
         }
     }
