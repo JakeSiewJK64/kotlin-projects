@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import androidx.core.text.isDigitsOnly
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -25,41 +26,37 @@ class MainActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        val mMedalistRecyclerView: RecyclerView = findViewById(R.id.mRecyclerView)
-        val medallistList = ArrayList<MedalistModel>()
-        val medalistAdapter = MedalistAdapter(supportFragmentManager, medallistList)
-
-        /**
-         * 1. Read each line from medallists.csv.
-         * 2. split() method separates each value by comma into individual data.
-         * 3. isDigitOnly() method returns true if the value only contains digits.
-         */
+    /**
+     * 1. Read each line from medallists.csv.
+     * 2. split() method separates each value by comma into individual data.
+     * 3. isDigitOnly() method returns true if the value only contains digits.
+     */
+    private fun readMedallistsCSV(): ArrayList<MedalistModel> {
+        val lt = ArrayList<MedalistModel>()
         resources.openRawResource(R.raw.medallists)
             .bufferedReader()
             .lines()
             .skip(1)
             .forEach {
                 val temp = it.split(",")
-                medallistList.add(
-                    MedalistModel(
-                        name = temp[0],
-                        IOC = temp[1],
-                        gold = temp[3].toInt(),
-                        silver = temp[4].toInt(),
-                        bronze = temp[5].toInt(),
+                if (temp[3].isDigitsOnly() && temp[4].isDigitsOnly() && temp[5].isDigitsOnly()) {
+                    lt.add(
+                        MedalistModel(
+                            name = temp[0],
+                            IOC = temp[1],
+                            gold = temp[3].toInt(),
+                            silver = temp[4].toInt(),
+                            bronze = temp[5].toInt(),
+                        )
                     )
-                )
+                }
             }
 
         /**
          * 1. sort medallist array list by total medals
          * 2. loop through medallist array list set isTop10 to true if index > 10
          */
-        medallistList.apply {
+        lt.apply {
             sortByDescending { i -> i.totalMedals }
             forEachIndexed { index, a ->
                 if (index < 10) {
@@ -67,6 +64,16 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+        return lt
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val medallistList = readMedallistsCSV()
+        val mMedalistRecyclerView: RecyclerView = findViewById(R.id.mRecyclerView)
+        val medalistAdapter = MedalistAdapter(supportFragmentManager, medallistList)
 
         mMedalistRecyclerView.adapter = medalistAdapter
         mMedalistRecyclerView.layoutManager = LinearLayoutManager(this)
