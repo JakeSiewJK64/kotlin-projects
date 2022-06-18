@@ -71,11 +71,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val medallistList = readMedallistsCSV()
-        val mMedalistRecyclerView: RecyclerView = findViewById(R.id.mRecyclerView)
-        val medalistAdapter = MedalistAdapter(supportFragmentManager, medallistList)
+        val medalistRecyclerView: RecyclerView = findViewById(R.id.mRecyclerView)
+        val medalistList = readMedallistsCSV()
+        val medalistAdapter = MedalistAdapter(supportFragmentManager, medalistList)
 
-        mMedalistRecyclerView.adapter = medalistAdapter
-        mMedalistRecyclerView.layoutManager = LinearLayoutManager(this)
+        medalistRecyclerView.adapter = medalistAdapter
+        medalistRecyclerView.layoutManager = LinearLayoutManager(this)
     }
 }
