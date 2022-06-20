@@ -21,7 +21,7 @@ class RecipeListFragment : Fragment(R.layout.fragment_recipe_list) {
 
     // method will detect any changes to firestore recipe collection
     // if changes were made, update/populate the recipe ArrayList
-    private fun eventChangeListener() {
+    private fun recipeChangeEventListener() {
         db = FirebaseFirestore.getInstance()
         val collection = db.collection(GlobalConstants.RECIPE_COLLECTION_PATH)
         collection.addSnapshotListener { value, err ->
@@ -59,6 +59,6 @@ class RecipeListFragment : Fragment(R.layout.fragment_recipe_list) {
             adapter = recipeAdapter
             layoutManager = LinearLayoutManager(view.context)
         }
-        eventChangeListener()
+        recipeChangeEventListener()
     }
 }

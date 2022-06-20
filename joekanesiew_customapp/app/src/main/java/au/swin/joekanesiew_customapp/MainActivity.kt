@@ -2,8 +2,6 @@ package au.swin.joekanesiew_customapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.Menu
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -12,38 +10,15 @@ import au.swin.joekanesiew_customapp.fragments.EventLogFragment
 import au.swin.joekanesiew_customapp.fragments.MainFragment
 import au.swin.joekanesiew_customapp.fragments.NewRecipeFragment
 import au.swin.joekanesiew_customapp.fragments.RecipeListFragment
-import au.swin.joekanesiew_customapp.models.Recipe
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.firestore.DocumentChange
-import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.top_app_bar.*
-import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
-
-    private lateinit var db: FirebaseFirestore
-    private lateinit var recipeList: ArrayList<Recipe>
 
     private lateinit var navView: NavigationView
     private lateinit var actionBarToggle: ActionBarDrawerToggle
     private lateinit var drawerLayout: DrawerLayout
-
-    // method fetches for recipe data from database
-    private fun getRecipeData() {
-        recipeList = ArrayList()
-        db = FirebaseFirestore.getInstance()
-        db.collection(GlobalConstants.RECIPE_COLLECTION_PATH).addSnapshotListener { value, err ->
-            if (err != null) {
-                Log.e("ERROR", err.message.toString())
-            }
-
-            for (dc: DocumentChange in value?.documentChanges!!) {
-                recipeList.add(dc.document.toObject(Recipe::class.java))
-            }
-            Log.i("DATA", recipeList.toString())
-        }
-    }
 
     private fun replaceFragment(myCustomView: Fragment) {
         supportFragmentManager.beginTransaction().apply {
@@ -110,6 +85,5 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
-        getRecipeData()
     }
 }
