@@ -1,6 +1,7 @@
-package au.swin.joekanesiew_customapp
+package au.swin.joekanesiew_customapp.models
 
 import android.os.Parcelable
+import au.swin.joekanesiew_customapp.EventLogEnum
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize

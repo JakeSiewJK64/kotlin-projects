@@ -1,9 +1,10 @@
-package au.swin.joekanesiew_customapp
+package au.swin.joekanesiew_customapp.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Button
+import au.swin.joekanesiew_customapp.R
 
 class MainFragment : Fragment(R.layout.fragment_main) {
 

@@ -1,4 +1,4 @@
-package au.swin.joekanesiew_customapp
+package au.swin.joekanesiew_customapp.fragments
 
 import android.os.Bundle
 import android.util.Log
@@ -6,6 +6,10 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import au.swin.joekanesiew_customapp.GlobalConstants
+import au.swin.joekanesiew_customapp.R
+import au.swin.joekanesiew_customapp.adapters.RecipeAdapter
+import au.swin.joekanesiew_customapp.models.Recipe
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -15,9 +19,11 @@ class RecipeListFragment : Fragment(R.layout.fragment_recipe_list) {
     private lateinit var recipeRecycler: RecyclerView
     private lateinit var recipeList: ArrayList<Recipe>
 
+    // method will detect any changes to firestore recipe collection
+    // if changes were made, update/populate the recipe ArrayList
     private fun eventChangeListener() {
         db = FirebaseFirestore.getInstance()
-        val collection = db.collection("joekanesiew-recipe")
+        val collection = db.collection(GlobalConstants.RECIPE_COLLECTION_PATH)
         collection.addSnapshotListener { value, err ->
             if (err != null) {
                 Log.e("ERROR", err.message.toString())
@@ -49,8 +55,10 @@ class RecipeListFragment : Fragment(R.layout.fragment_recipe_list) {
         recipeList = ArrayList()
         recipeAdapter = RecipeAdapter(recipeList, parentFragmentManager)
         recipeRecycler = view.findViewById(R.id.recipeRecycler)
-        recipeRecycler.adapter = recipeAdapter
-        recipeRecycler.layoutManager = LinearLayoutManager(view.context)
+        recipeRecycler.apply {
+            adapter = recipeAdapter
+            layoutManager = LinearLayoutManager(view.context)
+        }
         eventChangeListener()
     }
 }

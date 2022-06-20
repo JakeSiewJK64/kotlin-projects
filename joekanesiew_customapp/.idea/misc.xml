@@ -12,11 +12,12 @@
         <entry key="..\:/GitHub/JakeSiewJK64/kotlin-projects/joekanesiew_customapp/app/src/main/res/layout/event_log_viewmodel.xml" value="0.33" />
         <entry key="..\:/GitHub/JakeSiewJK64/kotlin-projects/joekanesiew_customapp/app/src/main/res/layout/fragment_event_log.xml" value="0.35462962962962963" />
         <entry key="..\:/GitHub/JakeSiewJK64/kotlin-projects/joekanesiew_customapp/app/src/main/res/layout/fragment_main.xml" value="0.33" />
-        <entry key="..\:/GitHub/JakeSiewJK64/kotlin-projects/joekanesiew_customapp/app/src/main/res/layout/fragment_new_recipe.xml" value="0.33" />
+        <entry key="..\:/GitHub/JakeSiewJK64/kotlin-projects/joekanesiew_customapp/app/src/main/res/layout/fragment_new_recipe.xml" value="0.25" />
         <entry key="..\:/GitHub/JakeSiewJK64/kotlin-projects/joekanesiew_customapp/app/src/main/res/layout/fragment_recipe_list.xml" value="0.35555555555555557" />
         <entry key="..\:/GitHub/JakeSiewJK64/kotlin-projects/joekanesiew_customapp/app/src/main/res/layout/recipeviewmodel.xml" value="0.33" />
-        <entry key="..\:/GitHub/JakeSiewJK64/kotlin-projects/joekanesiew_customapp/app/src/main/res/layout/top_app_bar.xml" value="0.36666666666666664" />
-        <entry key="..\:/GitHub/JakeSiewJK64/kotlin-projects/joekanesiew_customapp/app/src/main/res/menu/recipe_menu.xml" value="0.5" />
+        <entry key="..\:/GitHub/JakeSiewJK64/kotlin-projects/joekanesiew_customapp/app/src/main/res/layout/top_app_bar.xml" value="0.25" />
+        <entry key="..\:/GitHub/JakeSiewJK64/kotlin-projects/joekanesiew_customapp/app/src/main/res/menu/recipe_menu.xml" value="0.33" />
+        <entry key="..\:/GitHub/JakeSiewJK64/kotlin-projects/joekanesiew_customapp/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1625" />
       </map>
     </option>
   </component>

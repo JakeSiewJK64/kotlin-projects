@@ -1,4 +1,4 @@
-package au.swin.joekanesiew_customapp
+package au.swin.joekanesiew_customapp.fragments
 
 import android.app.Activity
 import android.app.AlertDialog
@@ -10,12 +10,14 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import au.swin.joekanesiew_customapp.EventLogEnum
+import au.swin.joekanesiew_customapp.GlobalConstants
+import au.swin.joekanesiew_customapp.R
+import au.swin.joekanesiew_customapp.models.EventLog
+import au.swin.joekanesiew_customapp.models.Recipe
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.firestore.FirebaseFirestore
@@ -29,7 +31,6 @@ import java.util.*
 
 class NewRecipeFragment : Fragment(R.layout.fragment_new_recipe) {
 
-    private val DATEFORMAT = "yyyy-mm-dd HH:MM:SS"
     private var fileName = ""
 
     private lateinit var db: FirebaseFirestore
@@ -47,16 +48,33 @@ class NewRecipeFragment : Fragment(R.layout.fragment_new_recipe) {
 
     private fun upsertRecipe(recipe: Recipe, view: View) {
         db = FirebaseFirestore.getInstance()
-        storage = Firebase.storage("gs://jakesiewjk64-customapp.appspot.com")
+        storage = Firebase.storage(GlobalConstants.STORAGE_COLLECTION_URL)
 
         val storageRef = storage.reference
         val recipeImageRef = storageRef.child("images/$fileName.jpg")
 
-        val dbCollection = db.collection("joekanesiew-recipe")
-        val eventLogCollection = db.collection("joekanesiew-eventlog")
+        val dbCollection = db.collection(GlobalConstants.RECIPE_COLLECTION_PATH)
+        val eventLogCollection = db.collection(GlobalConstants.EVENTLOG_COLLECTION_PATH)
 
+        /**
+         * 1. retrieving drawable from imageview
+         * 2. convert bitmap to byte array
+         * 3. upload image to Firebase Storage
+         */
+        val bitmap = (recipeImageUpload.drawable as BitmapDrawable).bitmap
+        val baos = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+        val data = baos.toByteArray()
+
+        val uploadTask = recipeImageRef.putBytes(data)
+        uploadTask.addOnSuccessListener { taskSnapshot ->
+            Snackbar.make(view, "Done Upload!$taskSnapshot", Snackbar.LENGTH_LONG)
+                .setAction("OK") {}.show()
+        }
+
+        // if existing recipe -> update
+        // if recipe does not have object id, means recipe is new, update
         if (recipe.ObjectId != null) {
-            // todo: append to recipe database
             dbCollection.document(recipe.ObjectId.toString()).set(recipe).addOnSuccessListener {
                 Log.i("DATA", "[SUCCESS] $recipe")
                 Snackbar.make(
@@ -66,8 +84,14 @@ class NewRecipeFragment : Fragment(R.layout.fragment_new_recipe) {
                         recipe.RecipeName
                     ),
                     Snackbar.LENGTH_LONG
-                ).setAction(resources.getString(R.string.okDialog)) {}.show()
-                // todo: append to event log
+                ).setAction(resources.getString(R.string.okDialog)) {
+                    parentFragmentManager.beginTransaction().apply {
+                        replace(R.id.recipeFragmentFrame, RecipeListFragment())
+                        commit()
+                        view.findViewById<ScrollView>(R.id.recipeFragmentLayout).removeAllViews()
+                    }
+                }.show()
+                // add update recipe event to event log
                 eventLogCollection.document().set(
                     EventLog(
                         null,
@@ -76,7 +100,7 @@ class NewRecipeFragment : Fragment(R.layout.fragment_new_recipe) {
                             recipe.RecipeName
                         ),
                         SimpleDateFormat(
-                            DATEFORMAT,
+                            GlobalConstants.GLOBAL_DATE_FORMAT,
                             Locale.getDefault()
                         ).format(Calendar.getInstance().time),
                         EventLogEnum.UPDATE
@@ -90,7 +114,13 @@ class NewRecipeFragment : Fragment(R.layout.fragment_new_recipe) {
                     view.findViewById(R.id.recipeFragmentLayout),
                     resources.getString(R.string.recipeDeleteSuccess),
                     Snackbar.LENGTH_LONG
-                ).setAction(resources.getString(R.string.okDialog)) {}.show()
+                ).setAction(resources.getString(R.string.okDialog)) {
+                    parentFragmentManager.beginTransaction().apply {
+                        replace(R.id.recipeFragmentFrame, RecipeListFragment())
+                        commit()
+                        view.findViewById<ScrollView>(R.id.recipeFragmentLayout).removeAllViews()
+                    }
+                }.show()
                 eventLogCollection.document().set(
                     EventLog(
                         null,
@@ -99,24 +129,13 @@ class NewRecipeFragment : Fragment(R.layout.fragment_new_recipe) {
                             recipe.RecipeName
                         ),
                         SimpleDateFormat(
-                            DATEFORMAT,
+                            GlobalConstants.GLOBAL_DATE_FORMAT,
                             Locale.getDefault()
                         ).format(Calendar.getInstance().time),
                         EventLogEnum.CREATE
                     )
                 )
             }
-        }
-        // todo: append to firebase storage
-        val bitmap = (recipeImageUpload.drawable as BitmapDrawable).bitmap
-        val baos = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-        val data = baos.toByteArray()
-
-        val uploadTask = recipeImageRef.putBytes(data)
-        uploadTask.addOnSuccessListener { taskSnapshot ->
-            Snackbar.make(view, "Done Upload!$taskSnapshot", Snackbar.LENGTH_LONG)
-                .setAction("OK") {}.show()
         }
     }
 
@@ -145,13 +164,14 @@ class NewRecipeFragment : Fragment(R.layout.fragment_new_recipe) {
                 recipe.RecipeName
             )
         )
+
         builder.setNegativeButton("Cancel") { _, _ ->
         }
 
         builder.setPositiveButton(resources.getString(R.string.okDialog)) { _, _ ->
             db = FirebaseFirestore.getInstance()
-            val recipeCollection = db.collection("joekanesiew-recipe")
-            val eventLogCollection = db.collection("joekanesiew-eventlog")
+            val recipeCollection = db.collection(GlobalConstants.RECIPE_COLLECTION_PATH)
+            val eventLogCollection = db.collection(GlobalConstants.EVENTLOG_COLLECTION_PATH)
             recipeCollection.document(recipe.ObjectId.toString()).delete()
                 .addOnSuccessListener {
                     Snackbar.make(
@@ -168,7 +188,7 @@ class NewRecipeFragment : Fragment(R.layout.fragment_new_recipe) {
                                 recipe.RecipeName
                             ),
                             SimpleDateFormat(
-                                DATEFORMAT,
+                                GlobalConstants.GLOBAL_DATE_FORMAT,
                                 Locale.getDefault()
                             ).format(Calendar.getInstance().time),
                             EventLogEnum.DELETE
@@ -179,10 +199,12 @@ class NewRecipeFragment : Fragment(R.layout.fragment_new_recipe) {
         builder.show()
     }
 
+    // method to validate input text against regex pattern
     private fun validateInput(input: String, regexPattern: String): Boolean {
         return input.matches(Regex(regexPattern))
     }
 
+    // validates if the input is blank
     private fun validateBlank(input: TextInputLayout): Boolean {
         if (input.editText?.text?.length == 0) {
             input.error = resources.getString(R.string.recipe_stringEmpty)
@@ -191,6 +213,7 @@ class NewRecipeFragment : Fragment(R.layout.fragment_new_recipe) {
         return true
     }
 
+    // displays basic snackbar with message
     private fun displaySnackbar(message: String, view: View) {
         Snackbar.make(
             view,
@@ -212,7 +235,7 @@ class NewRecipeFragment : Fragment(R.layout.fragment_new_recipe) {
         recipeDurationInput = view.findViewById(R.id.recipePrepTime)
         recipeFavoriteCheckbox = view.findViewById(R.id.recipeFavorite)
 
-        // todo: on image selected replace image view resource
+        // launches separate image browser for user to upload image of recipe
         val resultLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == Activity.RESULT_OK) {
@@ -222,18 +245,15 @@ class NewRecipeFragment : Fragment(R.layout.fragment_new_recipe) {
                         val inputStream: InputStream? =
                             view.context.contentResolver.openInputStream(uri!!)
                         val bMap: Bitmap = BitmapFactory.decodeStream(inputStream)
-
                         fileName = uri.path.toString()
-
                         recipeImageUpload.setImageBitmap(bMap)
-
                         Log.i("DATA", "[INTENT DATA]: $data")
                         Log.i("DATA", "[bMap]: $bMap")
                     }
                 }
             }
 
-        // todo: on image view tapped, initiate image browser from file application.
+        // if image view tapped, launch the above intent to browse for image
         recipeImageUpload.setOnClickListener {
             val i = Intent()
             i.type = "image/*"
@@ -243,9 +263,10 @@ class NewRecipeFragment : Fragment(R.layout.fragment_new_recipe) {
 
         val a = arguments?.getParcelable<Recipe>("RECIPE_DATA")
 
-        // todo: check if recipe is existing. if true, populate view with recipe data.
+        // checks if fragment argument is null = means new
+        // if not null, means existing, populate the views with appropriate data
         if (a != null) {
-            storage = Firebase.storage("gs://jakesiewjk64-customapp.appspot.com")
+            storage = Firebase.storage(GlobalConstants.STORAGE_COLLECTION_URL)
             val storageRef = storage.reference
             storageRef.child("images/${a.RecipeImages}.jpg").getBytes(Long.MAX_VALUE)
                 .addOnSuccessListener {
@@ -255,12 +276,12 @@ class NewRecipeFragment : Fragment(R.layout.fragment_new_recipe) {
             Log.i("RECIPE_DATA", a.toString())
             title.text = resources.getString(R.string.editRecipe)
             submitButton.text = resources.getString(R.string.updateRecipe)
-            a.let {
-                recipeNameInput.editText?.setText(it.RecipeName)
-                recipeDescInput.editText?.setText(it.RecipeDescription)
-                recipeStepsInput.editText?.setText(it.RecipeSteps)
-                recipeDurationInput.editText?.setText(it.PreparationTime.toString())
-                recipeFavoriteCheckbox.isChecked = it.Favorites.toString().toBoolean()
+            a.apply {
+                recipeNameInput.editText?.setText(RecipeName)
+                recipeDescInput.editText?.setText(RecipeDescription)
+                recipeStepsInput.editText?.setText(RecipeSteps)
+                recipeDurationInput.editText?.setText(PreparationTime.toString())
+                recipeFavoriteCheckbox.isChecked = Favorites.toString().toBoolean()
             }
             deleteButton.isEnabled = true
             deleteButton.setTextColor(resources.getColor(R.color.red, null))
@@ -280,16 +301,27 @@ class NewRecipeFragment : Fragment(R.layout.fragment_new_recipe) {
             val notEmptySteps = validateBlank(recipeStepsInput)
             val notEmptyDuration = validateBlank(recipeDurationInput)
 
+            // checks if recipe name is valid.
             if (!validName) {
                 recipeNameInput.editText?.error =
                     resources.getString(R.string.recipe_alphabets_only)
                 displaySnackbar(resources.getString(R.string.recipe_alphabets_only), view)
             }
 
+            // if recipe is new, generate an object id.
+            // recipe's ObjectId attribute used to reference recipe object for DELETE.
             var docId: String? = null
-            if (a != null) docId = a.ObjectId.toString()
+            if (a != null) {
+                docId = a.ObjectId.toString()
+                fileName = a.RecipeImages.toString()
+            }
 
-            if (notEmptyName && notEmptyDesc && notEmptySteps && validName && notEmptyDuration) {
+            if (fileName.isEmpty()) {
+                displaySnackbar("Please upload an image for the recipe!", view)
+            }
+
+            // validate all inputs, if true, upsert the recipe.
+            if (fileName.isNotEmpty() && notEmptyName && notEmptyDesc && notEmptySteps && validName && notEmptyDuration) {
                 upsertRecipe(
                     Recipe(
                         docId,

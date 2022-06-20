@@ -7,7 +7,6 @@
     <string name="add_new_recipe">Add New Recipe</string>
     <string name="submit_recipe">Submit Recipe</string>
     <string name="delete_recipe">Delete Recipe</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="view">VIEW</string>
 
     <string name="tako_recipe">Welcome to Tako Recipe!</string>

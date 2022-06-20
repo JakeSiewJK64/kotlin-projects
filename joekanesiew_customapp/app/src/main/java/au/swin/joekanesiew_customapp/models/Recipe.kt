@@ -1,4 +1,4 @@
-package au.swin.joekanesiew_customapp
+package au.swin.joekanesiew_customapp.models
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
