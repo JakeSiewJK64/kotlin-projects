@@ -8,10 +8,12 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.ScrollView
 import androidx.fragment.app.FragmentManager
+import au.swin.joekanesiew_customapp.adapters.RecipeAdapter
 import au.swin.joekanesiew_customapp.fragments.RecipeListFragment
 import au.swin.joekanesiew_customapp.models.EventLog
 import au.swin.joekanesiew_customapp.models.Recipe
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import java.io.ByteArrayOutputStream
@@ -23,6 +25,36 @@ class RecipeDao(
     private val view: View,
     private val fragmentManager: FragmentManager
 ) {
+
+    // method will detect any changes to firestore recipe collection
+    // if changes were made, update/populate the recipe ArrayList
+    fun recipeChangeEventListener(recipeList: ArrayList<Recipe>, recipeAdapter: RecipeAdapter) {
+        val collection = firestoreInstance.collection(GlobalConstants.RECIPE_COLLECTION_PATH)
+        collection.addSnapshotListener { value, err ->
+            if (err != null) {
+                Log.e("ERROR", err.message.toString())
+            }
+
+            for (dc: DocumentChange in value?.documentChanges!!) {
+                if (dc.type == DocumentChange.Type.ADDED) {
+                    recipeList.add(
+                        Recipe(
+                            dc.document.id,
+                            dc.document["recipeName"].toString(),
+                            dc.document["recipeDescription"].toString(),
+                            dc.document["recipeSteps"].toString(),
+                            dc.document["recipeImages"].toString(),
+                            dc.document["favorites"]?.toString().toBoolean(),
+                            dc.document["preparationTime"].toString().toInt(),
+                        )
+                    )
+                }
+            }
+            Log.i("DATA", recipeList.toString())
+            recipeAdapter.notifyDataSetChanged()
+        }
+    }
+
     // upsert recipe = insert if no object id, update if object id present
     fun upsertRecipe(
         recipe: Recipe,
