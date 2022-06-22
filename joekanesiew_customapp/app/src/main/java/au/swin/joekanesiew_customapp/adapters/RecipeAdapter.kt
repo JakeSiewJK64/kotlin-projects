@@ -13,8 +13,10 @@ import androidx.recyclerview.widget.RecyclerView
 import au.swin.joekanesiew_customapp.GlobalConstants
 import au.swin.joekanesiew_customapp.fragments.NewRecipeFragment
 import au.swin.joekanesiew_customapp.R
+import au.swin.joekanesiew_customapp.RecipeDao
 import au.swin.joekanesiew_customapp.models.Recipe
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 
@@ -29,7 +31,7 @@ class RecipeAdapter(
     }
 
     override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
-        holder.bind(recipeList[position], fragmentManager)
+        holder.bind(recipeList[position])
     }
 
     override fun getItemCount(): Int {
@@ -40,9 +42,11 @@ class RecipeAdapter(
         private val recipeName: TextView = view.findViewById(R.id.recipeName)
         private val recipeDescription: TextView = view.findViewById(R.id.recipeDescription)
         private val recipeImage: ImageView = view.findViewById(R.id.recipeImage)
-        private val viewRecipeButton: Button = view.findViewById(R.id.viewRecipeButton)
+        private val viewRecipeButton: Button = view.findViewById(R.id.viewRecipeButtonViewModel)
+        private val deleteRecipeButton: Button = view.findViewById(R.id.deleteRecipeButtonViewModel)
+        private val recipeDao = RecipeDao(FirebaseFirestore.getInstance(), view, fragmentManager)
 
-        fun bind(recipe: Recipe, fragmentManager: FragmentManager) {
+        fun bind(recipe: Recipe) {
             recipeName.text = recipe.RecipeName
             recipeDescription.text = recipe.RecipeDescription
 
@@ -54,7 +58,10 @@ class RecipeAdapter(
                     .addOnSuccessListener {
                         recipeImage.setImageBitmap(BitmapFactory.decodeByteArray(it, 0, it.size))
                     }
+            }
 
+            deleteRecipeButton.setOnClickListener {
+                recipeDao.deleteRecipe(recipe)
             }
 
             // if view button is tapped, switch to Recipe editor fragment

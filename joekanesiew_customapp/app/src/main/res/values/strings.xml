@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">joekanesiew_customapp</string>
+    <string name="app_name">TakoRecipe</string>
     <string name="recipe_name">Recipe Name</string>
     <string name="recipe_prepTime">Preparation Time</string>
     <string name="recipe_description">Recipe Description</string>
@@ -13,7 +13,7 @@
     <string name="tako_getstarted">To get started, select the following.</string>
 
     <string name="sampleLatteName">Latte</string>
-    <string name="sampleLatteDesc">Latte Desc</string>
+    <string name="sampleLatteDesc">Latte has more milk than cappucinno and americano.</string>
     <string name="sampleLatteSteps">Latte Steps</string>
 
     <string name="editRecipe">Edit Recipe</string>
@@ -59,4 +59,6 @@
     <string name="getstarted_viewevents">View Events</string>
     <string name="gettingstarted">Getting Started</string>
     <string name="recipe_favorite">Favorite</string>
+    <string name="joekane_copyright">Created By: Siew Joe Kane (103130764)</string>
+    <string name="delete">Delete</string>
 </resources>
