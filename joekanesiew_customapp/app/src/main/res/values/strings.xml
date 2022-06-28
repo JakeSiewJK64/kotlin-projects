@@ -16,6 +16,8 @@
     <string name="sampleLatteDesc">Latte has more milk than cappucinno and americano.</string>
     <string name="sampleLatteSteps">Latte Steps</string>
 
+    <string name="no_recipe">There are currently no recipe to show!</string>
+
     <string name="editRecipe">Edit Recipe</string>
     <string name="updateRecipe">Update Recipe</string>
 

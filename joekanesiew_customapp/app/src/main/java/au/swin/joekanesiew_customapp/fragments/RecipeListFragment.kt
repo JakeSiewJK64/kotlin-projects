@@ -16,7 +16,6 @@ class RecipeListFragment : Fragment(R.layout.fragment_recipe_list) {
     private lateinit var recipeAdapter: RecipeAdapter
     private lateinit var recipeRecycler: RecyclerView
     private lateinit var recipeList: ArrayList<Recipe>
-
     private lateinit var recipeDao: RecipeDao
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

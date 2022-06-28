@@ -6,6 +6,7 @@ import android.graphics.drawable.BitmapDrawable
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.ScrollView
 import androidx.fragment.app.FragmentManager
 import au.swin.joekanesiew_customapp.EventLogEnum
@@ -36,6 +37,8 @@ class RecipeDao(
         recipeAdapter: RecipeAdapter
     ) {
         val collection = firestoreInstance.collection(GlobalConstants.RECIPE_COLLECTION_PATH)
+        val noRecipeLinearLayout = view.findViewById<LinearLayout>(R.id.empty_recipe_linear)
+
         collection.addSnapshotListener { value, err ->
             if (err != null) {
                 Log.e("ERROR", err.message.toString())
@@ -56,6 +59,13 @@ class RecipeDao(
                     )
                 }
             }
+
+            if (recipeList.isEmpty()) {
+                noRecipeLinearLayout.visibility = View.VISIBLE
+            } else {
+                noRecipeLinearLayout.visibility = View.GONE
+            }
+
             Log.i("DATA", recipeList.toString())
             recipeAdapter.notifyDataSetChanged()
         }
