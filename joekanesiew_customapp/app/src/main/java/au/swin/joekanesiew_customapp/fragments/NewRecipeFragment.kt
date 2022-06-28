@@ -13,7 +13,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import au.swin.joekanesiew_customapp.GlobalConstants
 import au.swin.joekanesiew_customapp.R
-import au.swin.joekanesiew_customapp.RecipeDao
+import au.swin.joekanesiew_customapp.dao.RecipeDao
 import au.swin.joekanesiew_customapp.models.Recipe
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
@@ -22,7 +22,6 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 import java.io.InputStream
-import java.util.*
 
 class NewRecipeFragment : Fragment(R.layout.fragment_new_recipe) {
 

@@ -1,4 +1,4 @@
-package au.swin.joekanesiew_customapp
+package au.swin.joekanesiew_customapp.dao
 
 import android.app.AlertDialog
 import android.graphics.Bitmap
@@ -8,27 +8,33 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.ScrollView
 import androidx.fragment.app.FragmentManager
+import au.swin.joekanesiew_customapp.EventLogEnum
+import au.swin.joekanesiew_customapp.GlobalConstants
+import au.swin.joekanesiew_customapp.R
 import au.swin.joekanesiew_customapp.adapters.RecipeAdapter
 import au.swin.joekanesiew_customapp.fragments.RecipeListFragment
-import au.swin.joekanesiew_customapp.models.EventLog
 import au.swin.joekanesiew_customapp.models.Recipe
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import java.io.ByteArrayOutputStream
-import java.text.SimpleDateFormat
 import java.util.*
 
 class RecipeDao(
     private val firestoreInstance: FirebaseFirestore,
     private val view: View,
     private val fragmentManager: FragmentManager
-) {
+) : IRecipeDao {
+
+    private val eventLogDao = EventLogDao(firestoreInstance, view)
 
     // method will detect any changes to firestore recipe collection
     // if changes were made, update/populate the recipe ArrayList
-    fun recipeChangeEventListener(recipeList: ArrayList<Recipe>, recipeAdapter: RecipeAdapter) {
+    override fun recipeChangeEventListener(
+        recipeList: ArrayList<Recipe>,
+        recipeAdapter: RecipeAdapter
+    ) {
         val collection = firestoreInstance.collection(GlobalConstants.RECIPE_COLLECTION_PATH)
         collection.addSnapshotListener { value, err ->
             if (err != null) {
@@ -56,7 +62,7 @@ class RecipeDao(
     }
 
     // upsert recipe = insert if no object id, update if object id present
-    fun upsertRecipe(
+    override fun upsertRecipe(
         recipe: Recipe,
         firebaseStorage: FirebaseStorage,
         filename: String,
@@ -66,8 +72,6 @@ class RecipeDao(
         val recipeImageRef = storageRef.child("images/$filename.jpg")
 
         val dbCollection = firestoreInstance.collection(GlobalConstants.RECIPE_COLLECTION_PATH)
-        val eventLogCollection =
-            firestoreInstance.collection(GlobalConstants.EVENTLOG_COLLECTION_PATH)
 
         /**
          * 1. retrieving drawable from imageview
@@ -105,19 +109,10 @@ class RecipeDao(
                     }
                 }.show()
                 // add update recipe event to event log
-                eventLogCollection.document().set(
-                    EventLog(
-                        null,
-                        String.format(
-                            view.resources.getString(R.string.eventlog_update),
-                            recipe.RecipeName
-                        ),
-                        SimpleDateFormat(
-                            GlobalConstants.GLOBAL_DATE_FORMAT,
-                            Locale.getDefault()
-                        ).format(Calendar.getInstance().time),
-                        EventLogEnum.UPDATE
-                    )
+                eventLogDao.insertEventLog(
+                    recipe,
+                    R.string.eventlog_update,
+                    EventLogEnum.UPDATE
                 )
             }
         } else {
@@ -134,26 +129,17 @@ class RecipeDao(
                         view.findViewById<ScrollView>(R.id.recipeFragmentLayout).removeAllViews()
                     }
                 }.show()
-                eventLogCollection.document().set(
-                    EventLog(
-                        null,
-                        String.format(
-                            view.resources.getString(R.string.eventlog_create),
-                            recipe.RecipeName
-                        ),
-                        SimpleDateFormat(
-                            GlobalConstants.GLOBAL_DATE_FORMAT,
-                            Locale.getDefault()
-                        ).format(Calendar.getInstance().time),
-                        EventLogEnum.CREATE
-                    )
+                eventLogDao.insertEventLog(
+                    recipe,
+                    R.string.eventlog_create,
+                    EventLogEnum.CREATE
                 )
             }
         }
     }
 
     // responsible for deleting a recipe
-    fun deleteRecipe(recipe: Recipe) {
+    override fun deleteRecipe(recipe: Recipe) {
         val builder = AlertDialog.Builder(view.context)
         val deletedRecipeBuilder = AlertDialog.Builder(view.context)
 
@@ -185,8 +171,6 @@ class RecipeDao(
         builder.setPositiveButton(view.resources.getString(R.string.okDialog)) { _, _ ->
             val recipeCollection =
                 firestoreInstance.collection(GlobalConstants.RECIPE_COLLECTION_PATH)
-            val eventLogCollection =
-                firestoreInstance.collection(GlobalConstants.EVENTLOG_COLLECTION_PATH)
             recipeCollection.document(recipe.ObjectId.toString()).delete()
                 .addOnSuccessListener {
                     Snackbar.make(
@@ -195,19 +179,10 @@ class RecipeDao(
                         Snackbar.LENGTH_LONG
                     ).setAction("OK") {}.show()
                     deletedRecipeBuilder.show()
-                    eventLogCollection.document().set(
-                        EventLog(
-                            null,
-                            String.format(
-                                view.resources.getString(R.string.eventlog_delete),
-                                recipe.RecipeName
-                            ),
-                            SimpleDateFormat(
-                                GlobalConstants.GLOBAL_DATE_FORMAT,
-                                Locale.getDefault()
-                            ).format(Calendar.getInstance().time),
-                            EventLogEnum.DELETE
-                        )
+                    eventLogDao.insertEventLog(
+                        recipe,
+                        R.string.eventlog_delete,
+                        EventLogEnum.DELETE
                     )
                 }
         }

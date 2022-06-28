@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import au.swin.joekanesiew_customapp.GlobalConstants
 import au.swin.joekanesiew_customapp.fragments.NewRecipeFragment
 import au.swin.joekanesiew_customapp.R
-import au.swin.joekanesiew_customapp.RecipeDao
+import au.swin.joekanesiew_customapp.dao.RecipeDao
 import au.swin.joekanesiew_customapp.models.Recipe
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestore

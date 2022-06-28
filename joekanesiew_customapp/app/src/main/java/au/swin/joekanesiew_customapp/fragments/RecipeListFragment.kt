@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import au.swin.joekanesiew_customapp.R
-import au.swin.joekanesiew_customapp.RecipeDao
+import au.swin.joekanesiew_customapp.dao.RecipeDao
 import au.swin.joekanesiew_customapp.adapters.RecipeAdapter
 import au.swin.joekanesiew_customapp.models.Recipe
 import com.google.firebase.firestore.FirebaseFirestore
