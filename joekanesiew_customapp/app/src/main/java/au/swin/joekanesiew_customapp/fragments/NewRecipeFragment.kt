@@ -166,7 +166,6 @@ class NewRecipeFragment : Fragment(R.layout.fragment_new_recipe) {
 
             // validate all inputs, if true, upsert the recipe.
             if (fileName.isNotEmpty() && notEmptyName && notEmptyDesc && notEmptySteps && validName && notEmptyDuration) {
-                val storage = Firebase.storage(GlobalConstants.STORAGE_COLLECTION_URL)
                 recipeDao.upsertRecipe(
                     Recipe(
                         docId,
@@ -176,7 +175,7 @@ class NewRecipeFragment : Fragment(R.layout.fragment_new_recipe) {
                         fileName,
                         recipeFavoriteCheckbox.isChecked,
                         recipeDurationInput.editText?.text.toString().toInt()
-                    ), storage, fileName, recipeImageUpload
+                    ), fileName, recipeImageUpload
                 )
             }
         }

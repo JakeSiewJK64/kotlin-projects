@@ -18,7 +18,8 @@ import au.swin.joekanesiew_customapp.models.Recipe
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import java.io.ByteArrayOutputStream
 import java.util.*
 
@@ -74,11 +75,11 @@ class RecipeDao(
     // upsert recipe = insert if no object id, update if object id present
     override fun upsertRecipe(
         recipe: Recipe,
-        firebaseStorage: FirebaseStorage,
         filename: String,
         recipeImageUpload: ImageView
     ) {
-        val storageRef = firebaseStorage.reference
+        val storage = Firebase.storage(GlobalConstants.STORAGE_COLLECTION_URL)
+        val storageRef = storage.reference
         val recipeImageRef = storageRef.child("images/$filename.jpg")
 
         val dbCollection = firestoreInstance.collection(GlobalConstants.RECIPE_COLLECTION_PATH)
